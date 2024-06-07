@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+    x:Class="Chat.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:Chat"
+    Shell.FlyoutBehavior="Flyout"
+    Title="Chat"
+    FlyoutWidth="200">
+
+    <ShellContent Route="AccountPage"
+                  ContentTemplate="{DataTemplate local:AccountPage}" 
+                  Title="Tài khoản" 
+                  >
+    </ShellContent>
+
+    <ShellContent Route="MainPage" 
+                  Title="Đoạn chat"
+                  ContentTemplate="{DataTemplate local:MainPage}"
+                  />
+
+
+    <!--Hidden-->
+    <ShellContent Route="MessagePage" 
+                  IsVisible="False"
+                  ContentTemplate="{DataTemplate local:MessagePage}" />
+    <ShellContent Route="LoginPage"
+                  IsVisible="False"
+                  Title="Đăng nhập"
+                  ContentTemplate="{DataTemplate local:LoginPage}"
+                  />
+    <ShellContent Route="RegisterPage" 
+                  IsVisible="False"
+                  Title="Register"
+                  ContentTemplate="{DataTemplate local:RegisterPage}"
+                  />
+</Shell>

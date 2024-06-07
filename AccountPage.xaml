@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Chat.AccountPage"
+             Title="Account">
+    <StackLayout>
+        <Label x:Name="UsernameLabel"
+               FontSize="Medium"
+               HorizontalOptions="Center"
+               VerticalOptions="Center"
+               Text="Chưa đăng nhập?" />
+        <Label x:Name="FullNameLabel"
+                   FontSize="Medium"
+                   HorizontalOptions="Center"
+                   VerticalOptions="Center"
+                   Text="Unnamed" />
+        <StackLayout x:Name="NavButton"
+                     Orientation="Horizontal"
+                     HorizontalOptions="CenterAndExpand"
+                     IsVisible="False">
+            <Button Text="Đăng nhập"
+                    Clicked="LoginNav"/>
+            <Button Text="Đăng ký"
+                    Clicked="RegisterNav"/>
+        </StackLayout>
+        <Button x:Name="LogoutButton"
+                IsVisible="False"
+                Text="Đăng xuất"
+                Clicked="Logout"/>
+        <StackLayout IsVisible="Hidden">
+            <Label x:Name="CreateAt"
+                   FontSize="Medium"
+                   HorizontalOptions="Center"
+                   VerticalOptions="Center"
+                   Text="" />
+            <Entry x:Name="FullName" Placeholder="New Name"/>
+            <Entry x:Name="Password" Placeholder="New Password" IsPassword="True"/>
+            <Entry x:Name="ConfirmPassword" Placeholder="Xác nhận mật khẩu" IsPassword="True"/>
+            <Button Text="Cập nhật tài khoản" />
+        </StackLayout>
+    </StackLayout>
+</ContentPage>

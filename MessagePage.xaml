@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Chat.MessagePage"
+             Title="{Binding FullName}">
+    <StackLayout>
+        <ListView x:Name="MessagesListView" 
+                  SelectionMode="None" 
+                  SeparatorVisibility="None">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <StackLayout Orientation="Horizontal" 
+                                     HorizontalOptions="{Binding Alignment}">
+                            <Frame Margin="5" 
+                                   Padding="0" 
+                                   BackgroundColor="{Binding BackgroundColor}">
+                                <StackLayout>
+                                    <Label Text="{Binding Content}" 
+                                           IsVisible="True" 
+                                           HorizontalOptions="{Binding TextAlignment}" />
+                                    <Image Source="{Binding ImageSource}" 
+                                           IsVisible="{Binding IsImageMessage}" 
+                                           Aspect="AspectFit" HeightRequest="100" />
+                                    <Label Text="{Binding Timestamp}" 
+                                           FontSize="Micro" 
+                                           HorizontalOptions="{Binding TextAlignment}" />
+                                </StackLayout>
+                            </Frame>
+                        </StackLayout>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        <StackLayout Orientation="Horizontal" Padding="10">
+            <Entry x:Name="MessageEntry" Placeholder="Nhập tin nhắn..." 
+                   HorizontalOptions="FillAndExpand" />
+            <Button Text="Gửi" Clicked="OnSendButtonClicked" />
+        </StackLayout>
+    </StackLayout>
+</ContentPage>
