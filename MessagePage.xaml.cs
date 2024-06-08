@@ -27,21 +27,25 @@ public partial class MessagePage : ContentPage
         InitializeComponent();
         messageTo = userId;
         FullName = fullName;
-        messages = new ObservableCollection<Message>();
-        MessagesListView.ItemsSource = messages;
         Title = FullName;
-
-        // Start the timer to auto-refresh messages
-        StartAutoRefresh();
     }
 
     protected override async void OnAppearing()
     {
         base.OnAppearing();
         var currentUser = await CurrentUserInfo();
-        currentUserId = currentUser.Id;
-        LoadMessages(currentUser.Id, messageTo);
-        Title = FullName;
+        if (currentUser != null) 
+        {         
+            currentUserId = currentUser.Id;
+            messages = new ObservableCollection<Message>();
+            LoadMessages(currentUser.Id, messageTo);
+            MessagesListView.ItemsSource = messages;
+            StartAutoRefresh();
+        }
+        else
+        {
+            await Shell.Current.GoToAsync($"//{nameof(MainPage)}");
+        }
     }
 
     protected override void OnDisappearing()
@@ -83,10 +87,6 @@ public partial class MessagePage : ContentPage
                     await Application.Current.MainPage.DisplayAlert("Error", "Failed to fetch user information.", "OK");
                 }
             }
-            else
-            {
-                await Application.Current.MainPage.DisplayAlert("Error", "JWT token is missing.", "OK");
-            }
         }
         catch (Exception ex)
         {
@@ -106,6 +106,7 @@ public partial class MessagePage : ContentPage
             messages.Clear();
             foreach (var message in messageItems)
             {
+                message.IsIncoming = message.SendId != currentUserId;
                 messages.Add(message);
             }
         }
@@ -130,7 +131,7 @@ public partial class MessagePage : ContentPage
             var jwtToken = Preferences.Get("jwtToken", string.Empty);
             if (string.IsNullOrEmpty(jwtToken))
             {
-                await DisplayAlert("Error", "User is not authenticated.", "OK");
+                await DisplayAlert("Error", "Yêu cầu đăng nhập.", "OK");
                 return;
             }
 

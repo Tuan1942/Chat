@@ -8,59 +8,59 @@ build_property.PlatformNeutralAssembly =
 build_property.EnforceExtendedAnalyzerRules = 
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = Chat
-build_property.ProjectDir = D:\source\Visual Studio 2022\Pinterest\
+build_property.ProjectDir = D:\source\Visual Studio 2022\Chat\
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 
 
-[D:/source/Visual Studio 2022/Pinterest/AccountPage.xaml]
+[D:/source/Visual Studio 2022/Chat/AccountPage.xaml]
 build_metadata.AdditionalFiles.GenKind = Xaml
 build_metadata.AdditionalFiles.ManifestResourceName = Chat.AccountPage.xaml
 build_metadata.AdditionalFiles.TargetPath = AccountPage.xaml
 build_metadata.AdditionalFiles.RelativePath = AccountPage.xaml
 
-[D:/source/Visual Studio 2022/Pinterest/App.xaml]
+[D:/source/Visual Studio 2022/Chat/App.xaml]
 build_metadata.AdditionalFiles.GenKind = Xaml
 build_metadata.AdditionalFiles.ManifestResourceName = Chat.App.xaml
 build_metadata.AdditionalFiles.TargetPath = App.xaml
 build_metadata.AdditionalFiles.RelativePath = App.xaml
 
-[D:/source/Visual Studio 2022/Pinterest/AppShell.xaml]
+[D:/source/Visual Studio 2022/Chat/AppShell.xaml]
 build_metadata.AdditionalFiles.GenKind = Xaml
 build_metadata.AdditionalFiles.ManifestResourceName = Chat.AppShell.xaml
 build_metadata.AdditionalFiles.TargetPath = AppShell.xaml
 build_metadata.AdditionalFiles.RelativePath = AppShell.xaml
 
-[D:/source/Visual Studio 2022/Pinterest/LoginPage.xaml]
+[D:/source/Visual Studio 2022/Chat/LoginPage.xaml]
 build_metadata.AdditionalFiles.GenKind = Xaml
 build_metadata.AdditionalFiles.ManifestResourceName = Chat.LoginPage.xaml
 build_metadata.AdditionalFiles.TargetPath = LoginPage.xaml
 build_metadata.AdditionalFiles.RelativePath = LoginPage.xaml
 
-[D:/source/Visual Studio 2022/Pinterest/MainPage.xaml]
+[D:/source/Visual Studio 2022/Chat/MainPage.xaml]
 build_metadata.AdditionalFiles.GenKind = Xaml
 build_metadata.AdditionalFiles.ManifestResourceName = Chat.MainPage.xaml
 build_metadata.AdditionalFiles.TargetPath = MainPage.xaml
 build_metadata.AdditionalFiles.RelativePath = MainPage.xaml
 
-[D:/source/Visual Studio 2022/Pinterest/MessagePage.xaml]
+[D:/source/Visual Studio 2022/Chat/MessagePage.xaml]
 build_metadata.AdditionalFiles.GenKind = Xaml
 build_metadata.AdditionalFiles.ManifestResourceName = Chat.MessagePage.xaml
 build_metadata.AdditionalFiles.TargetPath = MessagePage.xaml
 build_metadata.AdditionalFiles.RelativePath = MessagePage.xaml
 
-[D:/source/Visual Studio 2022/Pinterest/RegisterPage.xaml]
+[D:/source/Visual Studio 2022/Chat/RegisterPage.xaml]
 build_metadata.AdditionalFiles.GenKind = Xaml
 build_metadata.AdditionalFiles.ManifestResourceName = Chat.RegisterPage.xaml
 build_metadata.AdditionalFiles.TargetPath = RegisterPage.xaml
 build_metadata.AdditionalFiles.RelativePath = RegisterPage.xaml
 
-[D:/source/Visual Studio 2022/Pinterest/Resources/Styles/Colors.xaml]
+[D:/source/Visual Studio 2022/Chat/Resources/Styles/Colors.xaml]
 build_metadata.AdditionalFiles.GenKind = Xaml
 build_metadata.AdditionalFiles.ManifestResourceName = Chat.Resources.Styles.Colors.xaml
 build_metadata.AdditionalFiles.TargetPath = Resources\Styles\Colors.xaml
 build_metadata.AdditionalFiles.RelativePath = Resources\Styles\Colors.xaml
 
-[D:/source/Visual Studio 2022/Pinterest/Resources/Styles/Styles.xaml]
+[D:/source/Visual Studio 2022/Chat/Resources/Styles/Styles.xaml]
 build_metadata.AdditionalFiles.GenKind = Xaml
 build_metadata.AdditionalFiles.ManifestResourceName = Chat.Resources.Styles.Styles.xaml
 build_metadata.AdditionalFiles.TargetPath = Resources\Styles\Styles.xaml

@@ -35,7 +35,7 @@ namespace Chat
                 var jwtToken = Preferences.Get("jwtToken", string.Empty);
                 if (string.IsNullOrEmpty(jwtToken))
                 {
-                    await DisplayAlert("Error", "User is not authenticated.", "OK");
+                    await DisplayAlert("Error", "Yêu cầu đăng nhập.", "OK");
                     return null;
                 }
 

@@ -24,7 +24,7 @@ namespace Chat.ViewModel
 
         public string Content => Type == "Message" ? Value : string.Empty;
         public string Timestamp => SentTime;
-        public bool IsIncoming => SendId != 1; // Assuming current user ID is 1
+        public bool IsIncoming { get; set; }
         public LayoutOptions Alignment => IsIncoming ? LayoutOptions.End : LayoutOptions.Start;
         public LayoutOptions TextAlignment => IsIncoming ? LayoutOptions.Start : LayoutOptions.End;
         public Color BackgroundColor => IsIncoming ? Color.FromHex("#D3D3D3") : Color.FromHex("#ADD8E6"); // LightGray and LightBlue

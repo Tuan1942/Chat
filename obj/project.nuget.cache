@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "upjCHrUFb2276OYulTM6nl3JXODofxuhUZ50l1uWM8Pfqtzc1EJczVivMdMQj4upiLxd8//bn4d8FBXeP/U9BQ==",
+  "dgSpecHash": "6UsujuCvvL83axWIviCgNXS6rJeACELOnqC28/EikbQv5hh9rQ/l2QLWo5zgZ5fQXAxqtNAiyIt/PKPwQoODDQ==",
   "success": true,
-  "projectFilePath": "D:\\source\\Visual Studio 2022\\Pinterest\\Chat.csproj",
+  "projectFilePath": "D:\\source\\Visual Studio 2022\\Chat\\Chat.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\ADMIN\\.nuget\\packages\\googlegson\\2.10.1.4\\googlegson.2.10.1.4.nupkg.sha512",
     "C:\\Users\\ADMIN\\.nuget\\packages\\microsoft.extensions.configuration\\8.0.0\\microsoft.extensions.configuration.8.0.0.nupkg.sha512",

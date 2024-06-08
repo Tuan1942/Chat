@@ -33921,11 +33921,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\source\\Visual Studio 2022\\Pinterest\\Chat.csproj",
+      "projectUniqueName": "D:\\source\\Visual Studio 2022\\Chat\\Chat.csproj",
       "projectName": "Chat",
-      "projectPath": "D:\\source\\Visual Studio 2022\\Pinterest\\Chat.csproj",
+      "projectPath": "D:\\source\\Visual Studio 2022\\Chat\\Chat.csproj",
       "packagesPath": "C:\\Users\\ADMIN\\.nuget\\packages\\",
-      "outputPath": "D:\\source\\Visual Studio 2022\\Pinterest\\obj\\",
+      "outputPath": "D:\\source\\Visual Studio 2022\\Chat\\obj\\",
       "projectStyle": "PackageReference",
       "crossTargeting": true,
       "fallbackFolders": [
