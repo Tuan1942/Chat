@@ -68,10 +68,10 @@ public partial class MessagePage : ContentPage
                     CookieContainer = new System.Net.CookieContainer()
                 };
 
-                handler.CookieContainer.Add(new Uri("http://192.168.0.116:3000"), new System.Net.Cookie("jwtToken", jwtToken));
+                handler.CookieContainer.Add(new Uri("http://192.168.0.108:3000"), new System.Net.Cookie("jwtToken", jwtToken));
 
                 var client = new HttpClient(handler);
-                var request = new HttpRequestMessage(HttpMethod.Get, "http://192.168.0.116:3000/user/current");
+                var request = new HttpRequestMessage(HttpMethod.Get, "http://192.168.0.108:3000/user/current");
                 request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", jwtToken);
 
                 var response = await client.SendAsync(request);
@@ -84,7 +84,7 @@ public partial class MessagePage : ContentPage
                 }
                 else
                 {
-                    await Application.Current.MainPage.DisplayAlert("Error", "Failed to fetch user information.", "OK");
+                    await Application.Current.MainPage.DisplayAlert("Lỗi", "Failed to fetch user information.", "OK");
                 }
             }
         }
@@ -100,7 +100,7 @@ public partial class MessagePage : ContentPage
         try
         {
             var client = new HttpClient();
-            var response = await client.GetStringAsync($"http://192.168.0.116:3000/Message/?sendId={sendId}&receiveId={receiveId}");
+            var response = await client.GetStringAsync($"http://192.168.0.108:3000/Message/?sendId={sendId}&receiveId={receiveId}");
             var messageItems = JsonConvert.DeserializeObject<List<Message>>(response);
 
             messages.Clear();
@@ -122,7 +122,7 @@ public partial class MessagePage : ContentPage
 
         if (string.IsNullOrEmpty(messageText))
         {
-            await DisplayAlert("Error", "Message cannot be empty.", "OK");
+            await DisplayAlert("Lỗi", "Message cannot be empty.", "OK");
             return;
         }
 
@@ -131,7 +131,7 @@ public partial class MessagePage : ContentPage
             var jwtToken = Preferences.Get("jwtToken", string.Empty);
             if (string.IsNullOrEmpty(jwtToken))
             {
-                await DisplayAlert("Error", "Yêu cầu đăng nhập.", "OK");
+                await DisplayAlert("Lỗi", "Yêu cầu đăng nhập.", "OK");
                 return;
             }
 
@@ -141,7 +141,7 @@ public partial class MessagePage : ContentPage
                 CookieContainer = new System.Net.CookieContainer()
             };
 
-            handler.CookieContainer.Add(new Uri("http://192.168.0.116:3000"), new System.Net.Cookie("jwtToken", jwtToken));
+            handler.CookieContainer.Add(new Uri("http://192.168.0.108:3000"), new System.Net.Cookie("jwtToken", jwtToken));
 
             var client = new HttpClient(handler);
             var message = new MessageSendModel
@@ -155,7 +155,7 @@ public partial class MessagePage : ContentPage
             var json = JsonConvert.SerializeObject(message);
             var content = new StringContent(json, Encoding.UTF8, "application/json");
 
-            var response = await client.PostAsync("http://192.168.0.116:3000/Message/SendMessage", content);
+            var response = await client.PostAsync("http://192.168.0.108:3000/Message/SendMessage", content);
 
             if (response.IsSuccessStatusCode)
             {
@@ -174,16 +174,16 @@ public partial class MessagePage : ContentPage
             else
             {
                 var responseContent = await response.Content.ReadAsStringAsync();
-                await DisplayAlert("Error", $"Failed to send message: {responseContent}", "OK");
+                await DisplayAlert("Lỗi", $"Failed to send message: {responseContent}", "OK");
             }
         }
         catch (HttpRequestException ex)
         {
-            await DisplayAlert("Error", $"Request error: {ex.Message}", "OK");
+            await DisplayAlert("Lỗi", $"Request error: {ex.Message}", "OK");
         }
         catch (Exception ex)
         {
-            await DisplayAlert("Error", $"An unexpected error occurred: {ex.Message}", "OK");
+            await DisplayAlert("Lỗi", $"An unexpected error occurred: {ex.Message}", "OK");
         }
     }
 
@@ -220,13 +220,13 @@ public partial class MessagePage : ContentPage
         try
         {
             var client = new HttpClient();
-            var response = await client.GetStringAsync($"http://192.168.0.116:3000/Message/?sendId={sendId}&receiveId={receiveId}");
+            var response = await client.GetStringAsync($"http://192.168.0.108:3000/Message/?sendId={sendId}&receiveId={receiveId}");
             var newMessages = JsonConvert.DeserializeObject<List<Message>>(response);
             return newMessages;
         }
         catch (Exception ex)
         {
-            await DisplayAlert("Error", $"Failed to load messages: {ex.Message}", "OK");
+            await DisplayAlert("Lỗi", $"Failed to load messages: {ex.Message}", "OK");
             return new List<Message>();
         }
     }

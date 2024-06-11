@@ -6,6 +6,7 @@ namespace Chat
 {
     public partial class AccountPage : ContentPage
     {
+        User user = new User();
         public AccountPage()
         {
             InitializeComponent();
@@ -17,13 +18,13 @@ namespace Chat
             var loginStatus = await LoadUserInfo();
             if (loginStatus == false)
             {
+                UserLogedIn.IsVisible = false;
                 NavButton.IsVisible = true;
-                LogoutButton.IsVisible = false;
             }
             else
             {
+                UserLogedIn.IsVisible = true;
                 NavButton.IsVisible = false;
-                LogoutButton.IsVisible = true;
             }
         }
 
@@ -42,10 +43,10 @@ namespace Chat
                         CookieContainer = new System.Net.CookieContainer()
                     };
 
-                    handler.CookieContainer.Add(new Uri("http://192.168.0.116:3000"), new System.Net.Cookie("jwtToken", jwtToken));
+                    handler.CookieContainer.Add(new Uri("http://192.168.0.108:3000"), new System.Net.Cookie("jwtToken", jwtToken));
 
                     var client = new HttpClient(handler);
-                    var request = new HttpRequestMessage(HttpMethod.Get, "http://192.168.0.116:3000/user/current");
+                    var request = new HttpRequestMessage(HttpMethod.Get, "http://192.168.0.108:3000/user/current");
                     request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", jwtToken);
 
                     var response = await client.SendAsync(request);
@@ -57,21 +58,22 @@ namespace Chat
                         // Check if the response is JSON
                         if (response.Content.Headers.ContentType.MediaType == "application/json")
                         {
-                            var user = JsonConvert.DeserializeObject<User>(responseData);
+                            user = JsonConvert.DeserializeObject<User>(responseData);
                             // Hiển thị tên người dùng trong ProfilePage
                             FullNameLabel.Text = user.FullName;
                             UsernameLabel.Text = user.Username;
+                            FullName.Text = user.FullName;
                             return true;
                         }
                         else
                         {
-                            await Application.Current.MainPage.DisplayAlert("Error", "Invalid response format received from the server.", "OK");
+                            await Application.Current.MainPage.DisplayAlert("Lỗi", "Invalid response format received from the server.", "OK");
                             return false;
                         }
                     }
                     else
                     {
-                        await Application.Current.MainPage.DisplayAlert("Error", await response.Content.ReadAsStringAsync(), "OK");
+                        await Application.Current.MainPage.DisplayAlert("Lỗi", await response.Content.ReadAsStringAsync(), "OK");
                         return false;
                     }
                 }
@@ -107,24 +109,19 @@ namespace Chat
                         CookieContainer = new System.Net.CookieContainer()
                     };
 
-                    handler.CookieContainer.Add(new Uri("http://192.168.0.116:3000"), new System.Net.Cookie("jwtToken", jwtToken));
+                    handler.CookieContainer.Add(new Uri("http://192.168.0.108:3000"), new System.Net.Cookie("jwtToken", jwtToken));
 
                     var client = new HttpClient(handler);
-                    var request = new HttpRequestMessage(HttpMethod.Post, "http://192.168.0.116:3000/user/logout");
+                    var request = new HttpRequestMessage(HttpMethod.Post, "http://192.168.0.108:3000/user/logout");
                     request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", jwtToken);
 
                     var response = await client.SendAsync(request);
                     if (response.IsSuccessStatusCode)
                     {
                         Preferences.Remove("jwtToken");
+                        user = new User();
                         OnAppearing(); 
                     }
-                    else
-                    {
-                    }
-                }
-                else
-                {
                 }
             }
             catch (HttpRequestException httpEx)
@@ -135,8 +132,72 @@ namespace Chat
             catch (Exception ex)
             {
                 System.Diagnostics.Debug.WriteLine($"Exception: {ex.Message}");
-                await DisplayAlert("Error", "An error occurred while logging out.", "OK");
+                await DisplayAlert("Lỗi", "An error occurred while logging out.", "OK");
             }
         }
+
+        private async void Change(object sender, EventArgs e)
+        {
+            try
+            {
+                if (!string.IsNullOrEmpty(Password.Text) && Password.Text == ConfirmPassword.Text)
+                {
+                    var username = user.Username;
+                    var fullname = FullName.Text;
+                    var password = Password.Text;
+
+                    var jwtToken = Preferences.Get("jwtToken", string.Empty);
+                    if (!string.IsNullOrEmpty(jwtToken))
+                    {
+                        var handler = new HttpClientHandler
+                        {
+                            UseCookies = true,
+                            CookieContainer = new System.Net.CookieContainer()
+                        };
+
+                        handler.CookieContainer.Add(new Uri("http://192.168.0.108:3000"), new System.Net.Cookie("jwtToken", jwtToken));
+
+                        var client = new HttpClient(handler);
+                        var request = new HttpRequestMessage(HttpMethod.Put, "http://192.168.0.108:3000/user/update");
+                        request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", jwtToken);
+
+                        var content = new MultipartFormDataContent
+                        {
+                            { new StringContent(username), "username" },
+                            { new StringContent(fullname), "fullname" },
+                            { new StringContent(password), "password" },
+                            { new StringContent(ConfirmPassword.Text), "confirmpassword" }
+                        };
+
+                        request.Content = content;
+
+                        var response = await client.SendAsync(request);
+
+                        if (response.IsSuccessStatusCode)
+                        {
+                            await DisplayAlert("Thành công", "Cập nhật tài khoản thành công", "OK");
+                            OnAppearing();
+                        }
+                        else
+                        {
+                            await DisplayAlert("Lỗi", await response.Content.ReadAsStringAsync(), "OK");
+                        }
+                    }
+                    else
+                    {
+                        await DisplayAlert("Lỗi", "JWT token is missing.", "OK");
+                    }
+                }
+                else
+                {
+                    await DisplayAlert("Lỗi", "Passwords do not match or are empty.", "OK");
+                }
+            }
+            catch (Exception ex)
+            {
+                await DisplayAlert("Lỗi", $"Không thể kết nối tới máy chủ: {ex.Message}", "OK");
+            }
+        }
+
     }
 }

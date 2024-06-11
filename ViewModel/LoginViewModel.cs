@@ -60,7 +60,7 @@ public class LoginViewModel : INotifyPropertyChanged
                 Password = Password
             };
 
-            HttpResponseMessage response = await client.PostAsJsonAsync("http://192.168.0.116:3000/user/loginAsync", loginData);
+            HttpResponseMessage response = await client.PostAsJsonAsync("http://192.168.0.108:3000/user/loginAsync", loginData);
 
             if (response.IsSuccessStatusCode)
             {

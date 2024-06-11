@@ -4,16 +4,32 @@
              x:Class="Chat.AccountPage"
              Title="Account">
     <StackLayout>
-        <Label x:Name="UsernameLabel"
+        <StackLayout x:Name="UserLogedIn">
+            <Label x:Name="UsernameLabel"
                FontSize="Medium"
                HorizontalOptions="Center"
-               VerticalOptions="Center"
-               Text="Chưa đăng nhập?" />
-        <Label x:Name="FullNameLabel"
+               VerticalOptions="Center" />
+            <Label x:Name="FullNameLabel"
                    FontSize="Medium"
                    HorizontalOptions="Center"
                    VerticalOptions="Center"
                    Text="Unnamed" />
+            <Button x:Name="LogoutButton"
+                Text="Đăng xuất"
+                Clicked="Logout"/>
+            <StackLayout x:Name="ModifyAccount" IsVisible="True">
+                <Label x:Name="CreateAt"
+                   FontSize="Medium"
+                   HorizontalOptions="Center"
+                   VerticalOptions="Center"
+                   Text="" />
+                <Entry x:Name="FullName" Placeholder="Tên người dùng mới"/>
+                <Entry x:Name="Password" Placeholder="Mật khẩu mới" IsPassword="True"/>
+                <Entry x:Name="ConfirmPassword" Placeholder="Xác nhận mật khẩu" IsPassword="True"/>
+                <Button Text="Cập nhật tài khoản"
+                    Clicked="Change"/>
+            </StackLayout>
+        </StackLayout>
         <StackLayout x:Name="NavButton"
                      Orientation="Horizontal"
                      HorizontalOptions="CenterAndExpand"
@@ -22,21 +38,6 @@
                     Clicked="LoginNav"/>
             <Button Text="Đăng ký"
                     Clicked="RegisterNav"/>
-        </StackLayout>
-        <Button x:Name="LogoutButton"
-                IsVisible="False"
-                Text="Đăng xuất"
-                Clicked="Logout"/>
-        <StackLayout IsVisible="Hidden">
-            <Label x:Name="CreateAt"
-                   FontSize="Medium"
-                   HorizontalOptions="Center"
-                   VerticalOptions="Center"
-                   Text="" />
-            <Entry x:Name="FullName" Placeholder="New Name"/>
-            <Entry x:Name="Password" Placeholder="New Password" IsPassword="True"/>
-            <Entry x:Name="ConfirmPassword" Placeholder="Xác nhận mật khẩu" IsPassword="True"/>
-            <Button Text="Cập nhật tài khoản" />
         </StackLayout>
     </StackLayout>
 </ContentPage>

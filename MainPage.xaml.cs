@@ -19,12 +19,12 @@ namespace Chat
         {
             try
             {
-                var users = await GetUsersFromApi("http://192.168.0.116:3000/user/list");
+                var users = await GetUsersFromApi("http://192.168.0.108:3000/user/list");
                 UserListView.ItemsSource = users;
             }
             catch (Exception ex)
             {
-                await DisplayAlert("Error", "Failed to load users.", "OK");
+                await DisplayAlert("Lỗi", "Failed to load users.", "OK");
             }
         }
 
@@ -35,7 +35,7 @@ namespace Chat
                 var jwtToken = Preferences.Get("jwtToken", string.Empty);
                 if (string.IsNullOrEmpty(jwtToken))
                 {
-                    await DisplayAlert("Error", "Yêu cầu đăng nhập.", "OK");
+                    await DisplayAlert("Lỗi", "Yêu cầu đăng nhập.", "OK");
                     return null;
                 }
 
@@ -48,7 +48,7 @@ namespace Chat
             }
             catch (Exception ex)
             {
-                await DisplayAlert("Error", "Failed to load users.", "OK");
+                await DisplayAlert("Lỗi", "Failed to load users.", "OK");
                 return null;
             }
         }
@@ -65,11 +65,11 @@ namespace Chat
         {
             try
             {
-                var images = await GetImagesFromApi("http://192.168.0.116:3000/image/all");
+                var images = await GetImagesFromApi("http://192.168.0.108:3000/image/all");
 
                 foreach (var image in images)
                 {
-                    var imageSource = await ImageHelper.GetImageFromApi($"http://192.168.0.116:3000/image/{image.Id}");
+                    var imageSource = await ImageHelper.GetImageFromApi($"http://192.168.0.108:3000/image/{image.Id}");
 
                     if (imageSource != null)
                     {
@@ -104,7 +104,7 @@ namespace Chat
             }
             catch (Exception ex)
             {
-                await DisplayAlert("Error", "Failed to load images.", "OK");
+                await DisplayAlert("Lỗi", "Failed to load images.", "OK");
                 return null;
             }
         }
