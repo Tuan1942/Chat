@@ -19,7 +19,7 @@ namespace Chat
         {
             try
             {
-                var users = await GetUsersFromApi("http://192.168.0.108:3000/user/list");
+                var users = await GetUsersFromApi(Connection.Server + "user/list");
                 UserListView.ItemsSource = users;
             }
             catch (Exception ex)
@@ -65,11 +65,11 @@ namespace Chat
         {
             try
             {
-                var images = await GetImagesFromApi("http://192.168.0.108:3000/image/all");
+                var images = await GetImagesFromApi(Connection.Server + "image/all");
 
                 foreach (var image in images)
                 {
-                    var imageSource = await ImageHelper.GetImageFromApi($"http://192.168.0.108:3000/image/{image.Id}");
+                    var imageSource = await ImageHelper.GetImageFromApi(Connection.Server + "image/{image.Id}");
 
                     if (imageSource != null)
                     {

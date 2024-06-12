@@ -1,4 +1,6 @@
-﻿namespace Chat
+﻿using Chat.ViewModel;
+
+namespace Chat
 {
     public partial class RegisterPage : ContentPage
     {
@@ -27,7 +29,7 @@
                         { new StringContent(PasswordEntryConfirm.Text), "confirmpassword" }
                     };
 
-                    var response = await client.PostAsync("http://192.168.0.108:3000/user/register", content);
+                    var response = await client.PostAsync(Connection.Server + "user/register", content);
 
                     if (response.IsSuccessStatusCode)
                     {

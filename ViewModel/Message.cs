@@ -31,7 +31,7 @@ namespace Chat.ViewModel
 
         public bool IsTextMessage => Type == "Message";
         public bool IsImageMessage => Type == "Image";
-        public ImageSource ImageSource => IsImageMessage ? ImageSource.FromUri(new Uri($"http://192.168.0.108:3000/image/{Value}")) : null;
+        public ImageSource ImageSource => IsImageMessage ? ImageSource.FromUri(new Uri(Connection.Server + "image/{Value}")) : null;
     }
 
 

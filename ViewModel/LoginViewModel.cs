@@ -5,6 +5,7 @@ using System.Net.Http;
 using System.Net.Http.Json;
 using System.Threading.Tasks;
 using Newtonsoft.Json.Linq;
+using Chat.ViewModel;
 
 public class LoginViewModel : INotifyPropertyChanged
 {
@@ -60,7 +61,7 @@ public class LoginViewModel : INotifyPropertyChanged
                 Password = Password
             };
 
-            HttpResponseMessage response = await client.PostAsJsonAsync("http://192.168.0.108:3000/user/loginAsync", loginData);
+            HttpResponseMessage response = await client.PostAsJsonAsync(Connection.Server + "user/loginAsync", loginData);
 
             if (response.IsSuccessStatusCode)
             {

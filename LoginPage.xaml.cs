@@ -1,4 +1,6 @@
-﻿namespace Chat
+﻿using Chat.ViewModel;
+
+namespace Chat
 {
     public partial class LoginPage : ContentPage
     {
@@ -26,11 +28,11 @@
                     { new StringContent(password), "password" }
                 };
 
-                var response = await client.PostAsync("http://192.168.0.108:3000/user/login", content);
+                var response = await client.PostAsync(Connection.Server + "user/login", content);
 
                 if (response.IsSuccessStatusCode)
                 {
-                    var cookies = handler.CookieContainer.GetCookies(new Uri("http://192.168.0.108:3000"));
+                    var cookies = handler.CookieContainer.GetCookies(new Uri(Connection.Server));
                     foreach (System.Net.Cookie cookie in cookies)
                     {
                         if (cookie.Name == "jwtToken")

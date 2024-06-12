@@ -43,10 +43,10 @@ namespace Chat
                         CookieContainer = new System.Net.CookieContainer()
                     };
 
-                    handler.CookieContainer.Add(new Uri("http://192.168.0.108:3000"), new System.Net.Cookie("jwtToken", jwtToken));
+                    handler.CookieContainer.Add(new Uri(Connection.Server), new System.Net.Cookie("jwtToken", jwtToken));
 
                     var client = new HttpClient(handler);
-                    var request = new HttpRequestMessage(HttpMethod.Get, "http://192.168.0.108:3000/user/current");
+                    var request = new HttpRequestMessage(HttpMethod.Get, Connection.Server + "user/current");
                     request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", jwtToken);
 
                     var response = await client.SendAsync(request);
@@ -109,10 +109,10 @@ namespace Chat
                         CookieContainer = new System.Net.CookieContainer()
                     };
 
-                    handler.CookieContainer.Add(new Uri("http://192.168.0.108:3000"), new System.Net.Cookie("jwtToken", jwtToken));
+                    handler.CookieContainer.Add(new Uri(Connection.Server), new System.Net.Cookie("jwtToken", jwtToken));
 
                     var client = new HttpClient(handler);
-                    var request = new HttpRequestMessage(HttpMethod.Post, "http://192.168.0.108:3000/user/logout");
+                    var request = new HttpRequestMessage(HttpMethod.Post, Connection.Server + "user/logout");
                     request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", jwtToken);
 
                     var response = await client.SendAsync(request);
@@ -155,10 +155,10 @@ namespace Chat
                             CookieContainer = new System.Net.CookieContainer()
                         };
 
-                        handler.CookieContainer.Add(new Uri("http://192.168.0.108:3000"), new System.Net.Cookie("jwtToken", jwtToken));
+                        handler.CookieContainer.Add(new Uri(Connection.Server), new System.Net.Cookie("jwtToken", jwtToken));
 
                         var client = new HttpClient(handler);
-                        var request = new HttpRequestMessage(HttpMethod.Put, "http://192.168.0.108:3000/user/update");
+                        var request = new HttpRequestMessage(HttpMethod.Put, Connection.Server + "user/update");
                         request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", jwtToken);
 
                         var content = new MultipartFormDataContent
