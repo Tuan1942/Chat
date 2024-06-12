@@ -1,5 +1,4 @@
 ﻿using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 using Chat.ViewModel;
 using System.Collections.ObjectModel;
 using System.Net.Http.Headers;
@@ -34,11 +33,11 @@ public partial class MessagePage : ContentPage
     {
         base.OnAppearing();
         var currentUser = await CurrentUserInfo();
-        if (currentUser != null) 
-        {         
+        if (currentUser != null)
+        {
             currentUserId = currentUser.Id;
             messages = new ObservableCollection<Message>();
-            LoadMessages(currentUser.Id, messageTo);
+            await LoadMessages(currentUser.Id, messageTo);
             MessagesListView.ItemsSource = messages;
             StartAutoRefresh();
         }
@@ -95,16 +94,16 @@ public partial class MessagePage : ContentPage
         return null;
     }
 
-    private async void LoadMessages(int sendId, int receiveId)
+    private async Task LoadMessages(int sendId, int receiveId)
     {
         try
         {
             var client = new HttpClient();
             var response = await client.GetStringAsync(Connection.Server + "Message/?sendId=" + sendId + "&receiveId=" + receiveId);
-            var messageItems = JsonConvert.DeserializeObject<List<Message>>(response);
+            var newMessages = JsonConvert.DeserializeObject<List<Message>>(response);
 
             messages.Clear();
-            foreach (var message in messageItems)
+            foreach (var message in newMessages)
             {
                 message.IsIncoming = message.SendId != currentUserId;
                 messages.Add(message);
@@ -201,33 +200,28 @@ public partial class MessagePage : ContentPage
         });
     }
 
-    private async void RefreshMessages()
-    {
-        var newMessages = await FetchMessages(currentUserId, messageTo);
-        if (newMessages.Count > messages.Count)
-        {
-            messages.Clear();
-            foreach (var msg in newMessages)
-            {
-                messages.Add(msg);
-            }
-            MessagesListView.ScrollTo(newMessages.Last(), ScrollToPosition.End, true);
-        }
-    }
-
-    private async Task<List<Message>> FetchMessages(int sendId, int receiveId)
+    private async Task RefreshMessages()
     {
         try
         {
             var client = new HttpClient();
-            var response = await client.GetStringAsync(Connection.Server + "Message/?sendId=" + sendId + "&receiveId=" + receiveId);
+            var response = await client.GetStringAsync(Connection.Server + "Message/?sendId=" + currentUserId + "&receiveId=" + messageTo);
             var newMessages = JsonConvert.DeserializeObject<List<Message>>(response);
-            return newMessages;
+
+            if (newMessages.Count > messages.Count)
+            {
+                messages.Clear();
+                foreach (var message in newMessages)
+                {
+                    message.IsIncoming = message.SendId != currentUserId;
+                    messages.Add(message);
+                }
+                MessagesListView.ScrollTo(newMessages.Last(), ScrollToPosition.End, true);
+            }
         }
         catch (Exception ex)
         {
             await DisplayAlert("Lỗi", $"Failed to load messages: {ex.Message}", "OK");
-            return new List<Message>();
         }
     }
 

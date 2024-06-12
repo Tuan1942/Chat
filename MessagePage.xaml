@@ -18,7 +18,7 @@
                                 <StackLayout>
                                     <Label Text="{Binding Content}" 
                                            IsVisible="True" 
-                                           HorizontalOptions="{Binding TextAlignment}" />
+                                           HorizontalOptions="{Binding Alignment}" />
                                     <Image Source="{Binding ImageSource}" 
                                            IsVisible="{Binding IsImageMessage}" 
                                            Aspect="AspectFit" HeightRequest="100" />

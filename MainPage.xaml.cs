@@ -24,7 +24,6 @@ namespace Chat
             }
             catch (Exception ex)
             {
-                await DisplayAlert("Lỗi", "Failed to load users.", "OK");
             }
         }
 
@@ -35,7 +34,6 @@ namespace Chat
                 var jwtToken = Preferences.Get("jwtToken", string.Empty);
                 if (string.IsNullOrEmpty(jwtToken))
                 {
-                    await DisplayAlert("Lỗi", "Yêu cầu đăng nhập.", "OK");
                     return null;
                 }
 
@@ -48,7 +46,6 @@ namespace Chat
             }
             catch (Exception ex)
             {
-                await DisplayAlert("Lỗi", "Failed to load users.", "OK");
                 return null;
             }
         }
@@ -104,7 +101,6 @@ namespace Chat
             }
             catch (Exception ex)
             {
-                await DisplayAlert("Lỗi", "Failed to load images.", "OK");
                 return null;
             }
         }
