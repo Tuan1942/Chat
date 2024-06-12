@@ -73,7 +73,7 @@ namespace Chat
                     }
                     else
                     {
-                        await Application.Current.MainPage.DisplayAlert("Lỗi", await response.Content.ReadAsStringAsync(), "OK");
+                        await Application.Current.MainPage.DisplayAlert("", "Yêu cầu đăng nhập lại.", "OK");
                         return false;
                     }
                 }

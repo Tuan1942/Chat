@@ -1,28 +1,39 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:Chat.ViewModel"
              x:Class="Chat.MessagePage"
              Title="{Binding FullName}">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <local:MessageHeightConverter x:Key="MessageHeightConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
     <StackLayout>
         <ListView x:Name="MessagesListView" 
                   SelectionMode="None" 
-                  SeparatorVisibility="None">
+                  SeparatorVisibility="None"
+                  HasUnevenRows="True">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
-                        <StackLayout Orientation="Horizontal" 
-                                     HorizontalOptions="{Binding Alignment}">
+                        <StackLayout Orientation="Vertical" 
+                                     HorizontalOptions="{Binding Alignment}"
+                                     HeightRequest="{Binding IsNotTextMessage, Converter={StaticResource MessageHeightConverter}}">
                             <Frame Margin="5" 
-                                   Padding="0" 
-                                   BackgroundColor="{Binding BackgroundColor}">
+                                   Padding="5" 
+                                   BackgroundColor="{Binding BackgroundColor}"
+                                   HasShadow="True">
                                 <StackLayout>
-                                    <Label Text="{Binding Content}" 
-                                           IsVisible="True" 
+                                    <Label Text="{Binding Value}" 
+                                           IsVisible="{Binding IsTextMessage}" 
                                            HorizontalOptions="{Binding Alignment}" />
                                     <Image Source="{Binding ImageSource}" 
-                                           IsVisible="{Binding IsImageMessage}" 
-                                           Aspect="AspectFit" HeightRequest="100" />
-                                    <Label Text="{Binding Timestamp}" 
+                                           IsVisible="{Binding IsNotTextMessage}" 
+                                           Aspect="AspectFit" 
+                                           HeightRequest="200" 
+                                           VerticalOptions="FillAndExpand" />
+                                    <Label Text="{Binding SentTime}" 
                                            FontSize="Micro" 
                                            HorizontalOptions="{Binding TextAlignment}" />
                                 </StackLayout>

@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using Chat.ViewModel;
 using System.Collections.ObjectModel;
 using System.Net.Http.Headers;
@@ -37,7 +38,7 @@ public partial class MessagePage : ContentPage
         {
             currentUserId = currentUser.Id;
             messages = new ObservableCollection<Message>();
-            await LoadMessages(currentUser.Id, messageTo);
+            LoadMessages(currentUser.Id, messageTo);
             MessagesListView.ItemsSource = messages;
             StartAutoRefresh();
         }
@@ -94,19 +95,23 @@ public partial class MessagePage : ContentPage
         return null;
     }
 
-    private async Task LoadMessages(int sendId, int receiveId)
+    private async void LoadMessages(int sendId, int receiveId)
     {
         try
         {
             var client = new HttpClient();
             var response = await client.GetStringAsync(Connection.Server + "Message/?sendId=" + sendId + "&receiveId=" + receiveId);
-            var newMessages = JsonConvert.DeserializeObject<List<Message>>(response);
+            var messageItems = JsonConvert.DeserializeObject<List<Message>>(response);
 
-            messages.Clear();
-            foreach (var message in newMessages)
+            if (messageItems.Count > messages.Count)
             {
-                message.IsIncoming = message.SendId != currentUserId;
-                messages.Add(message);
+                messages.Clear();
+                foreach (var message in messageItems)
+                {
+                    message.IsIncoming = message.SendId != currentUserId;
+                    messages.Add(message);
+                }
+                MessagesListView.ScrollTo(messages.Last(), ScrollToPosition.End, true);
             }
         }
         catch (Exception ex)
@@ -193,36 +198,11 @@ public partial class MessagePage : ContentPage
         {
             if (isRunning)
             {
-                RefreshMessages();
+                LoadMessages(currentUserId, messageTo);
                 return true; // Repeat again
             }
             return false; // Stop the timer
         });
-    }
-
-    private async Task RefreshMessages()
-    {
-        try
-        {
-            var client = new HttpClient();
-            var response = await client.GetStringAsync(Connection.Server + "Message/?sendId=" + currentUserId + "&receiveId=" + messageTo);
-            var newMessages = JsonConvert.DeserializeObject<List<Message>>(response);
-
-            if (newMessages.Count > messages.Count)
-            {
-                messages.Clear();
-                foreach (var message in newMessages)
-                {
-                    message.IsIncoming = message.SendId != currentUserId;
-                    messages.Add(message);
-                }
-                MessagesListView.ScrollTo(newMessages.Last(), ScrollToPosition.End, true);
-            }
-        }
-        catch (Exception ex)
-        {
-            await DisplayAlert("Lỗi", $"Failed to load messages: {ex.Message}", "OK");
-        }
     }
 
     public class MessageSendModel

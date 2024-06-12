@@ -8,6 +8,6 @@ namespace Chat.ViewModel
 {
     internal class Connection
     {
-        public static string Server = "http://192.168.0.108:3000/";
+        public static string Server = "http://192.168.40.100:3000/";
     }
 }
