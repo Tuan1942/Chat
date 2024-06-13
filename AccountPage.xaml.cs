@@ -15,6 +15,7 @@ namespace Chat
         protected override async void OnAppearing()
         {
             base.OnAppearing();
+            user = new User();
             var loginStatus = await LoadUserInfo();
             if (loginStatus == false)
             {

@@ -17,7 +17,7 @@
             <Button x:Name="LogoutButton"
                 Text="Đăng xuất"
                 Clicked="Logout"/>
-            <StackLayout x:Name="ModifyAccount" IsVisible="True">
+            <StackLayout x:Name="ModifyAccount" >
                 <Label x:Name="CreateAt"
                    FontSize="Medium"
                    HorizontalOptions="Center"
@@ -32,8 +32,7 @@
         </StackLayout>
         <StackLayout x:Name="NavButton"
                      Orientation="Horizontal"
-                     HorizontalOptions="CenterAndExpand"
-                     IsVisible="False">
+                     HorizontalOptions="CenterAndExpand">
             <Button Text="Đăng nhập"
                     Clicked="LoginNav"/>
             <Button Text="Đăng ký"

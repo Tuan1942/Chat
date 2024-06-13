@@ -7,12 +7,12 @@
 
     For more information on package manifest files, see http://go.microsoft.com/fwlink/?LinkID=241727
   -->
-  <Identity Name="com.companyname.pinterest" Publisher="CN=User Name" Version="1.0.0.1" ProcessorArchitecture="x64" />
+  <Identity Name="com.companyname.chat" Publisher="CN=User Name" Version="1.0.0.1" ProcessorArchitecture="x64" />
   <mp:PhoneIdentity PhoneProductId="628F9D11-12D6-4122-A6B4-8EF3EC6C3D7A" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
   <Properties>
-    <DisplayName>Pinterest</DisplayName>
+    <DisplayName>Chat</DisplayName>
     <PublisherDisplayName>User Name</PublisherDisplayName>
-    <Logo>appiconStoreLogo.png</Logo>
+    <Logo>tunaStoreLogo.png</Logo>
   </Properties>
   <Dependencies>
     <TargetDeviceFamily Name="Windows.Universal" MinVersion="10.0.17763.0" MaxVersionTested="10.0.19041.0" />
@@ -24,14 +24,14 @@
   </Resources>
   <Applications>
     <Application Id="App" Executable="Chat.exe" EntryPoint="Windows.FullTrustApplication">
-      <uap:VisualElements DisplayName="Pinterest" Description="Pinterest" Square150x150Logo="appiconMediumTile.png" Square44x44Logo="appiconLogo.png" BackgroundColor="transparent">
-        <uap:DefaultTile Square71x71Logo="appiconSmallTile.png" Wide310x150Logo="appiconWideTile.png" Square310x310Logo="appiconLargeTile.png" ShortName="Pinterest">
+      <uap:VisualElements DisplayName="Chat" Description="Chat" Square150x150Logo="tunaMediumTile.png" Square44x44Logo="tunaLogo.png" BackgroundColor="transparent">
+        <uap:DefaultTile Square71x71Logo="tunaSmallTile.png" Wide310x150Logo="tunaWideTile.png" Square310x310Logo="tunaLargeTile.png" ShortName="Chat">
           <uap:ShowNameOnTiles>
             <uap:ShowOn Tile="square150x150Logo" />
             <uap:ShowOn Tile="wide310x150Logo" />
           </uap:ShowNameOnTiles>
         </uap:DefaultTile>
-        <uap:SplashScreen Image="splashSplashScreen.png" />
+        <uap:SplashScreen Image="kekwSplashScreen.png" />
       </uap:VisualElements>
     </Application>
   </Applications>
