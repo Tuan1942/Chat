@@ -3,6 +3,14 @@
   "WorkspaceRootPath": "D:\\source\\Visual Studio 2022\\Chat\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{4512981A-2C60-4043-9493-173F0EA59B2B}|Chat.csproj|d:\\source\\visual studio 2022\\chat\\messagepage.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4512981A-2C60-4043-9493-173F0EA59B2B}|Chat.csproj|solutionrelative:messagepage.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4512981A-2C60-4043-9493-173F0EA59B2B}|Chat.csproj|d:\\source\\visual studio 2022\\chat\\messagepage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{4512981A-2C60-4043-9493-173F0EA59B2B}|Chat.csproj|solutionrelative:messagepage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{4512981A-2C60-4043-9493-173F0EA59B2B}|Chat.csproj|d:\\source\\visual studio 2022\\chat\\accountpage.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{4512981A-2C60-4043-9493-173F0EA59B2B}|Chat.csproj|solutionrelative:accountpage.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -13,14 +21,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{4512981A-2C60-4043-9493-173F0EA59B2B}|Chat.csproj|d:\\source\\visual studio 2022\\chat\\accountpage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
       "RelativeMoniker": "D:0:0:{4512981A-2C60-4043-9493-173F0EA59B2B}|Chat.csproj|solutionrelative:accountpage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{4512981A-2C60-4043-9493-173F0EA59B2B}|Chat.csproj|d:\\source\\visual studio 2022\\chat\\messagepage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
-      "RelativeMoniker": "D:0:0:{4512981A-2C60-4043-9493-173F0EA59B2B}|Chat.csproj|solutionrelative:messagepage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{4512981A-2C60-4043-9493-173F0EA59B2B}|Chat.csproj|d:\\source\\visual studio 2022\\chat\\messagepage.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{4512981A-2C60-4043-9493-173F0EA59B2B}|Chat.csproj|solutionrelative:messagepage.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -30,11 +30,11 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 4,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 3,
               "Title": "network_security_config.xml",
               "DocumentMoniker": "D:\\source\\Visual Studio 2022\\Chat\\Resources\\xml\\network_security_config.xml",
               "RelativeDocumentMoniker": "Resources\\xml\\network_security_config.xml",
@@ -42,12 +42,11 @@
               "RelativeToolTip": "Resources\\xml\\network_security_config.xml",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAYAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003576|",
-              "WhenOpened": "2024-06-13T13:12:54.753Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-06-13T13:12:54.753Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 4,
               "Title": "AccountPage.xaml",
               "DocumentMoniker": "D:\\source\\Visual Studio 2022\\Chat\\AccountPage.xaml",
               "RelativeDocumentMoniker": "AccountPage.xaml",
@@ -55,46 +54,46 @@
               "RelativeToolTip": "AccountPage.xaml",
               "ViewState": "AQIAAAYAAAAAAAAAAAAQwB0AAAAeAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2024-06-13T01:07:02.948Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-06-13T01:07:02.948Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 2,
               "Title": "AccountPage.xaml.cs",
               "DocumentMoniker": "D:\\source\\Visual Studio 2022\\Chat\\AccountPage.xaml.cs",
               "RelativeDocumentMoniker": "AccountPage.xaml.cs",
               "ToolTip": "D:\\source\\Visual Studio 2022\\Chat\\AccountPage.xaml.cs",
               "RelativeToolTip": "AccountPage.xaml.cs",
-              "ViewState": "AQIAAB4AAAAAAAAAAAAmwIkAAAAJAAAA",
+              "ViewState": "AQIAAD4AAAAAAAAAAAAmwIkAAAAJAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-06-12T11:28:06.736Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 1,
               "Title": "MessagePage.xaml",
               "DocumentMoniker": "D:\\source\\Visual Studio 2022\\Chat\\MessagePage.xaml",
               "RelativeDocumentMoniker": "MessagePage.xaml",
               "ToolTip": "D:\\source\\Visual Studio 2022\\Chat\\MessagePage.xaml",
               "RelativeToolTip": "MessagePage.xaml",
-              "ViewState": "AQIAAAYAAAAAAAAAAAAAABMAAAAeAAAA",
+              "ViewState": "AQIAABYAAAAAAAAAAAAQwC8AAAAMAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
               "WhenOpened": "2024-06-12T10:46:02.89Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 0,
               "Title": "MessagePage.xaml.cs",
               "DocumentMoniker": "D:\\source\\Visual Studio 2022\\Chat\\MessagePage.xaml.cs",
               "RelativeDocumentMoniker": "MessagePage.xaml.cs",
               "ToolTip": "D:\\source\\Visual Studio 2022\\Chat\\MessagePage.xaml.cs",
               "RelativeToolTip": "MessagePage.xaml.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAG8AAAAqAAAA",
+              "ViewState": "AQIAAPkAAAAAAAAAAAAmwAQBAAANAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-12T08:22:49.775Z"
+              "WhenOpened": "2024-06-12T08:22:49.775Z",
+              "EditorCaption": ""
             }
           ]
         }

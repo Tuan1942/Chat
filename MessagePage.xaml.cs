@@ -204,6 +204,74 @@ public partial class MessagePage : ContentPage
             return false; // Stop the timer
         });
     }
+    private async void OnSelectImageButtonClicked(object sender, EventArgs e)
+    {
+        try
+        {
+            var imageFile = await MediaPicker.PickPhotoAsync();
+
+            if (imageFile == null)
+                return;
+
+            var jwtToken = Preferences.Get("jwtToken", string.Empty);
+            if (string.IsNullOrEmpty(jwtToken))
+            {
+                await DisplayAlert("Lỗi", "Yêu cầu đăng nhập.", "OK");
+                return;
+            }
+
+            var handler = new HttpClientHandler
+            {
+                UseCookies = true,
+                CookieContainer = new System.Net.CookieContainer()
+            };
+
+            handler.CookieContainer.Add(new Uri(Connection.Server), new System.Net.Cookie("jwtToken", jwtToken));
+
+            var client = new HttpClient(handler);
+
+            // Convert the image file to byte array
+            byte[] imageData;
+            using (var stream = await imageFile.OpenReadAsync())
+            {
+                using (MemoryStream ms = new MemoryStream())
+                {
+                    await stream.CopyToAsync(ms);
+                    imageData = ms.ToArray();
+                }
+            }
+
+            // Prepare the multipart form data
+            var formContent = new MultipartFormDataContent();
+            formContent.Headers.ContentType.MediaType = "multipart/form-data";
+
+            var imageContent = new ByteArrayContent(imageData);
+            imageContent.Headers.ContentType = MediaTypeHeaderValue.Parse("image/jpeg");
+            formContent.Add(imageContent, "image", "image.jpg");
+
+            var sendIdContent = new StringContent(currentUserId.ToString());
+            formContent.Add(sendIdContent, "sendId");
+
+            var receiveIdContent = new StringContent(messageTo.ToString());
+            formContent.Add(receiveIdContent, "receiveId");
+
+            var response = await client.PostAsync(Connection.Server + "image/upload", formContent);
+
+            if (response.IsSuccessStatusCode)
+            {
+                await DisplayAlert("Thành công", "Gửi hình ảnh thành công.", "OK");
+            }
+            else
+            {
+                var responseContent = await response.Content.ReadAsStringAsync();
+                await DisplayAlert("Lỗi", $"Failed to send image: {responseContent}", "OK");
+            }
+        }
+        catch (Exception ex)
+        {
+            await DisplayAlert("Lỗi", $"An unexpected error occurred: {ex.Message}", "OK");
+        }
+    }
 
     public class MessageSendModel
     {

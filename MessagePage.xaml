@@ -44,6 +44,7 @@
             </ListView.ItemTemplate>
         </ListView>
         <StackLayout Orientation="Horizontal" Padding="10">
+            <Button Text="📷" Clicked="OnSelectImageButtonClicked" />
             <Entry x:Name="MessageEntry" Placeholder="Nhập tin nhắn..." 
                    HorizontalOptions="FillAndExpand" />
             <Button Text="Gửi" Clicked="OnSendButtonClicked" />
