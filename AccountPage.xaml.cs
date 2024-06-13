@@ -141,6 +141,7 @@ namespace Chat
         {
             try
             {
+                // Nguời dùng nhập cả mật khẩu, sẽ thực hiện đổi mật khẩu
                 if (!string.IsNullOrEmpty(Password.Text) && Password.Text == ConfirmPassword.Text)
                 {
                     var username = user.Username;
@@ -189,9 +190,56 @@ namespace Chat
                         await DisplayAlert("Lỗi", "JWT token is missing.", "OK");
                     }
                 }
+                // Người dùng không nhập mật khẩu, chỉ thực hiện đổi tên người dùng
+                else if (string.IsNullOrEmpty(Password.Text))
+                {
+                    var username = user.Username;
+                    var fullname = FullName.Text;
+                    var password = Password.Text;
+
+                    var jwtToken = Preferences.Get("jwtToken", string.Empty);
+                    if (!string.IsNullOrEmpty(jwtToken))
+                    {
+                        var handler = new HttpClientHandler
+                        {
+                            UseCookies = true,
+                            CookieContainer = new System.Net.CookieContainer()
+                        };
+
+                        handler.CookieContainer.Add(new Uri(Connection.Server), new System.Net.Cookie("jwtToken", jwtToken));
+
+                        var client = new HttpClient(handler);
+                        var request = new HttpRequestMessage(HttpMethod.Put, Connection.Server + "user/update");
+                        request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", jwtToken);
+
+                        var content = new MultipartFormDataContent
+                        {
+                            { new StringContent(username), "username" },
+                            { new StringContent(fullname), "fullname" }
+                        };
+
+                        request.Content = content;
+
+                        var response = await client.SendAsync(request);
+
+                        if (response.IsSuccessStatusCode)
+                        {
+                            await DisplayAlert("Thành công", "Cập nhật tài khoản thành công", "OK");
+                            OnAppearing();
+                        }
+                        else
+                        {
+                            await DisplayAlert("Lỗi", await response.Content.ReadAsStringAsync(), "OK");
+                        }
+                    }
+                    else
+                    {
+                        await DisplayAlert("Lỗi", "JWT token is missing.", "OK");
+                    }
+                }
                 else
                 {
-                    await DisplayAlert("Lỗi", "Passwords do not match or are empty.", "OK");
+                    await DisplayAlert("Lỗi", "Mật khẩu xác nhận không chính xác.", "OK");
                 }
             }
             catch (Exception ex)
