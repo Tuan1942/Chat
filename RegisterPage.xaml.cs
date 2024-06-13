@@ -34,6 +34,7 @@ namespace Chat
                     if (response.IsSuccessStatusCode)
                     {
                         await DisplayAlert("Thành công", "Đăng ký thành công", "OK");
+                        await Shell.Current.GoToAsync($"//{nameof(AccountPage)}");
                     }
                     else
                     {
