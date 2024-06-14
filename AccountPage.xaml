@@ -4,6 +4,7 @@
              x:Class="Chat.AccountPage"
              Title="Account">
     <StackLayout>
+        <!--Giao diện thông tin người dùng và cập nhật tài khoản-->
         <StackLayout x:Name="UserLogedIn">
             <Label x:Name="UsernameLabel"
                FontSize="Medium"
@@ -30,6 +31,7 @@
                     Clicked="Change"/>
             </StackLayout>
         </StackLayout>
+        <!--Nếu người dùng chưa đăng nhập, hiển thị nút điều hướng-->
         <StackLayout x:Name="NavButton"
                      Orientation="Horizontal"
                      HorizontalOptions="CenterAndExpand">

@@ -42,7 +42,7 @@ namespace Chat
                     }
 
                     await DisplayAlert("Thành công", "Đăng nhập thành công", "OK");
-                    // Chuyển hướng tới trang chính hoặc dashboard
+                    // Chuyển hướng tới trang chính 
                     await Shell.Current.GoToAsync("//" + nameof(AccountPage));
                 }
                 else

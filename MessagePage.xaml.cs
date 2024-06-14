@@ -51,10 +51,11 @@ public partial class MessagePage : ContentPage
     protected override void OnDisappearing()
     {
         base.OnDisappearing();
-        // Stop the auto-refresh when the page disappears
+        // Dừng làm mới
         isRunning = false;
     }
 
+    // Lấy thông tin người dùng hiện tại đăng nhập
     private async Task<User> CurrentUserInfo()
     {
         try
@@ -84,7 +85,7 @@ public partial class MessagePage : ContentPage
                 }
                 else
                 {
-                    await Application.Current.MainPage.DisplayAlert("Lỗi", "Failed to fetch user information.", "OK");
+                    await Application.Current.MainPage.DisplayAlert("Lỗi", "Không thể tìm thấy thông tin người dùng.", "OK");
                 }
             }
         }
@@ -95,6 +96,7 @@ public partial class MessagePage : ContentPage
         return null;
     }
 
+    // Tải danh sách các tin nhắn
     private async void LoadMessages(int sendId, int receiveId)
     {
         try
@@ -120,13 +122,14 @@ public partial class MessagePage : ContentPage
         }
     }
 
+    // Gửi tin nhắn văn bản
     private async void OnSendButtonClicked(object sender, EventArgs e)
     {
         var messageText = MessageEntry.Text;
 
         if (string.IsNullOrEmpty(messageText))
         {
-            await DisplayAlert("Lỗi", "Message cannot be empty.", "OK");
+            await DisplayAlert("Lỗi", "Cần nhập tin nhắn.", "OK");
             return;
         }
 
@@ -191,6 +194,7 @@ public partial class MessagePage : ContentPage
         }
     }
 
+    // Tự động làm mới mỗi 5s, nếu có tin nhắn mới, đưa lên màn hình
     private void StartAutoRefresh()
     {
         isRunning = true;
@@ -204,11 +208,13 @@ public partial class MessagePage : ContentPage
             return false; // Stop the timer
         });
     }
+
+    // Gửi tin nhắn hình ảnh
     private async void OnSelectImageButtonClicked(object sender, EventArgs e)
     {
         try
         {
-            var imageFile = await MediaPicker.PickPhotoAsync();
+            var imageFile = await MediaPicker.PickPhotoAsync(); // Mở danh mục hình ảnh từ bộ nhớ điện thoại
 
             if (imageFile == null)
                 return;
@@ -230,7 +236,7 @@ public partial class MessagePage : ContentPage
 
             var client = new HttpClient(handler);
 
-            // Convert the image file to byte array
+            // Chuyển hình ảnh thành dạng dữ liệu byte array
             byte[] imageData;
             using (var stream = await imageFile.OpenReadAsync())
             {
@@ -241,20 +247,24 @@ public partial class MessagePage : ContentPage
                 }
             }
 
-            // Prepare the multipart form data
+            // Thêm thông tin vào request
             var formContent = new MultipartFormDataContent();
             formContent.Headers.ContentType.MediaType = "multipart/form-data";
 
+            // Thêm hình ảnh vào request
             var imageContent = new ByteArrayContent(imageData);
             imageContent.Headers.ContentType = MediaTypeHeaderValue.Parse("image/jpeg");
             formContent.Add(imageContent, "image", "image.jpg");
 
+            // Thông tin người gửi
             var sendIdContent = new StringContent(currentUserId.ToString());
             formContent.Add(sendIdContent, "sendId");
 
+            // Thông tin người nhận
             var receiveIdContent = new StringContent(messageTo.ToString());
             formContent.Add(receiveIdContent, "receiveId");
 
+            // Gửi request tới server
             var response = await client.PostAsync(Connection.Server + "image/upload", formContent);
 
             if (response.IsSuccessStatusCode)
@@ -273,6 +283,7 @@ public partial class MessagePage : ContentPage
         }
     }
 
+    // Dùng cho việc gửi tin nhắn văn bản
     public class MessageSendModel
     {
         public int Id { get; set; }

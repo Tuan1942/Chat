@@ -53,8 +53,8 @@ namespace Chat
         {
             if (e.Item != null && e.Item is User user)
             {
-                await Navigation.PushAsync(new MessagePage(user.Id, user.FullName));
-                ((ListView)sender).SelectedItem = null; // Deselect the item
+                await Navigation.PushAsync(new MessagePage(user.Id, user.FullName)); // vào giao diện nhắn tin với người được chọn
+                ((ListView)sender).SelectedItem = null; // Deselect item
             }
         }
 

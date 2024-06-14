@@ -4,6 +4,7 @@
              Title="Đoạn chat">
 
     <ScrollView>
+        <!--Danh sách người dùng đã có trong hệ thống-->
         <ListView x:Name="UserListView" ItemTapped="OnItemTapped">
             <ListView.ItemTemplate>
                 <DataTemplate>

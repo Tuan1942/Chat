@@ -10,6 +10,7 @@
         </ResourceDictionary>
     </ContentPage.Resources>
     <StackLayout>
+        <!--Danh sách tin nhắn-->
         <ListView x:Name="MessagesListView" 
                   SelectionMode="None" 
                   SeparatorVisibility="None"
@@ -28,6 +29,7 @@
                                     <Label Text="{Binding Value}" 
                                            IsVisible="{Binding IsTextMessage}" 
                                            HorizontalOptions="{Binding Alignment}" />
+                                    <!--Hiển thị hình ảnh trên tin nhắn-->
                                     <Image Source="{Binding ImageSource}" 
                                            IsVisible="{Binding IsNotTextMessage}" 
                                            Aspect="AspectFit" 
@@ -43,6 +45,7 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
+        <!--Gửi tin nhắn-->
         <StackLayout Orientation="Horizontal" Padding="10">
             <Button Text="📷" Clicked="OnSelectImageButtonClicked" />
             <Entry x:Name="MessageEntry" Placeholder="Nhập tin nhắn..." 

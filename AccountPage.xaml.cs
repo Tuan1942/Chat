@@ -24,11 +24,12 @@ namespace Chat
             }
             else
             {
-                UserLogedIn.IsVisible = true;
-                NavButton.IsVisible = false;
+                UserLogedIn.IsVisible = true; // Nơi hiển thị thông tin người dùng
+                NavButton.IsVisible = false; // Các nút điều hướng tới đăng nhập, đăng ký
             }
         }
 
+        // Tải thông tin người dùng
         private async Task<bool> LoadUserInfo()
         {
             UsernameLabel.Text = "";
@@ -74,6 +75,7 @@ namespace Chat
                     }
                     else
                     {
+                        // Token vẫn còn trong bộ nhớ, nhưng đã hết hạn
                         await Application.Current.MainPage.DisplayAlert("", "Yêu cầu đăng nhập lại.", "OK");
                         return false;
                     }
@@ -119,7 +121,7 @@ namespace Chat
                     var response = await client.SendAsync(request);
                     if (response.IsSuccessStatusCode)
                     {
-                        Preferences.Remove("jwtToken");
+                        Preferences.Remove("jwtToken"); // Loại bỏ token khỏi bộ nhớ
                         user = new User();
                         OnAppearing(); 
                     }
@@ -137,6 +139,7 @@ namespace Chat
             }
         }
 
+        // Cập nhật tài khoản
         private async void Change(object sender, EventArgs e)
         {
             try
