@@ -6,7 +6,7 @@
              Title="{Binding FullName}">
     <ContentPage.Resources>
         <ResourceDictionary>
-            <local:MessageHeightConverter x:Key="MessageHeightConverter" />
+            <local:MessageWidthConverter x:Key="MessageWidthConverter" />
         </ResourceDictionary>
     </ContentPage.Resources>
     <StackLayout>
@@ -20,7 +20,7 @@
                     <ViewCell>
                         <StackLayout Orientation="Vertical" 
                                      HorizontalOptions="{Binding Alignment}"
-                                     HeightRequest="{Binding IsNotTextMessage, Converter={StaticResource MessageHeightConverter}}">
+                                     WidthRequest="{Binding IsNotTextMessage, Converter={StaticResource MessageWidthConverter}}">
                             <Frame Margin="5" 
                                    Padding="5" 
                                    BackgroundColor="{Binding BackgroundColor}"
@@ -33,8 +33,9 @@
                                     <Image Source="{Binding ImageSource}" 
                                            IsVisible="{Binding IsNotTextMessage}" 
                                            Aspect="AspectFit" 
-                                           HeightRequest="200" 
-                                           VerticalOptions="FillAndExpand" />
+                                           VerticalOptions="FillAndExpand"
+                                           HorizontalOptions="{Binding Alignment}" />
+                                    <!--Hiển thị mốc thời gian-->
                                     <Label Text="{Binding SentTime}" 
                                            FontSize="Micro" 
                                            HorizontalOptions="{Binding TextAlignment}" />
@@ -45,6 +46,28 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
+        <!--Gửi hình ảnh-->
+        <Grid x:Name="ImageEntry"
+              Padding="10"
+              IsVisible="False">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <!-- Hình ảnh xem trước -->
+            <Image x:Name="PreviewImage" 
+                   Grid.Row="0"
+                   Aspect="AspectFit" 
+                   HorizontalOptions="Center" 
+                   VerticalOptions="Center" 
+                   HeightRequest="200"/>
+            <StackLayout Grid.Row="1" Orientation="Horizontal" 
+                 HorizontalOptions="End" VerticalOptions="Center"
+                 Spacing="10">
+                <Button HeightRequest="50" x:Name="CancelImageButton" Text="Hủy" Clicked="OnCancelImageButtonClicked" />
+                <Button HeightRequest="50" x:Name="SendImageButton" Text="Gửi" Clicked="OnSendImageButtonClicked" />
+            </StackLayout>
+        </Grid>
         <!--Gửi tin nhắn-->
         <StackLayout Orientation="Horizontal" Padding="10">
             <Button Text="📷" Clicked="OnSelectImageButtonClicked" />

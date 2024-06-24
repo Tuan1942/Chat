@@ -14,6 +14,7 @@ public partial class MessagePage : ContentPage
     int currentUserId;
     public string FullName;
     private bool isRunning;
+    private FileResult selectedImageFile;
 
     public MessagePage()
     {
@@ -209,16 +210,59 @@ public partial class MessagePage : ContentPage
         });
     }
 
-    // Gửi tin nhắn hình ảnh
+    // Chọn hình ảnh từ bộ nhớ
     private async void OnSelectImageButtonClicked(object sender, EventArgs e)
     {
         try
         {
-            var imageFile = await MediaPicker.PickPhotoAsync(); // Mở danh mục hình ảnh từ bộ nhớ điện thoại
+            string action = await DisplayActionSheet("Chọn nguồn ảnh", "Hủy", null, "Chụp ảnh mới", "Chọn từ bộ nhớ");
 
-            if (imageFile == null)
+            if (action == "Chọn từ bộ nhớ")
+            {
+                selectedImageFile = await MediaPicker.PickPhotoAsync();
+            }
+            else if (action == "Chụp ảnh mới")
+            {
+                selectedImageFile = await MediaPicker.CapturePhotoAsync();
+            }
+            else
+            {
+                return;
+            }
+
+            if (selectedImageFile == null)
                 return;
 
+            using (var stream = await selectedImageFile.OpenReadAsync())
+            {
+                using (MemoryStream ms = new MemoryStream())
+                {
+                    await stream.CopyToAsync(ms);
+                    byte[] imageData = ms.ToArray();
+
+                    // Hiển thị xem trước hình ảnh
+                    PreviewImage.Source = ImageSource.FromStream(() => new MemoryStream(imageData));
+                    ImageEntry.IsVisible = true;
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            await DisplayAlert("Lỗi", $"An unexpected error occurred: {ex.Message}", "OK");
+        }
+    }
+
+    // Gửi tin nhắn hình ảnh
+    private async void OnSendImageButtonClicked(object sender, EventArgs e)
+    {
+        if (selectedImageFile == null)
+        {
+            await DisplayAlert("Lỗi", "Vui lòng chọn một hình ảnh trước khi gửi.", "OK");
+            return;
+        }
+
+        try
+        {
             var jwtToken = Preferences.Get("jwtToken", string.Empty);
             if (string.IsNullOrEmpty(jwtToken))
             {
@@ -238,7 +282,7 @@ public partial class MessagePage : ContentPage
 
             // Chuyển hình ảnh thành dạng dữ liệu byte array
             byte[] imageData;
-            using (var stream = await imageFile.OpenReadAsync())
+            using (var stream = await selectedImageFile.OpenReadAsync())
             {
                 using (MemoryStream ms = new MemoryStream())
                 {
@@ -254,7 +298,7 @@ public partial class MessagePage : ContentPage
             // Thêm hình ảnh vào request
             var imageContent = new ByteArrayContent(imageData);
             imageContent.Headers.ContentType = MediaTypeHeaderValue.Parse("image/jpeg");
-            formContent.Add(imageContent, "image", "image.jpg");
+            formContent.Add(imageContent, "image", selectedImageFile.FileName);
 
             // Thông tin người gửi
             var sendIdContent = new StringContent(currentUserId.ToString());
@@ -270,6 +314,8 @@ public partial class MessagePage : ContentPage
             if (response.IsSuccessStatusCode)
             {
                 await DisplayAlert("Thành công", "Gửi hình ảnh thành công.", "OK");
+                ImageEntry.IsVisible = false; // Ẩn hình ảnh sau khi gửi thành công
+                selectedImageFile = null; // Reset selected image
             }
             else
             {
@@ -281,6 +327,12 @@ public partial class MessagePage : ContentPage
         {
             await DisplayAlert("Lỗi", $"An unexpected error occurred: {ex.Message}", "OK");
         }
+    }
+
+    private void OnCancelImageButtonClicked(object sender, EventArgs e)
+    {
+        ImageEntry.IsVisible = false;
+        selectedImageFile = null;
     }
 
     // Dùng cho việc gửi tin nhắn văn bản
