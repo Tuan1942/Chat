@@ -3,16 +3,16 @@
   "WorkspaceRootPath": "D:\\repos\\Chat\\Chat\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{4512981A-2C60-4043-9493-173F0EA59B2B}|Chat.csproj|d:\\repos\\chat\\chat\\platforms\\android\\androidmanifest.xml||{4E01A4BC-CFCF-452C-8C08-51352512D197}",
-      "RelativeMoniker": "D:0:0:{4512981A-2C60-4043-9493-173F0EA59B2B}|Chat.csproj|solutionrelative:platforms\\android\\androidmanifest.xml||{4E01A4BC-CFCF-452C-8C08-51352512D197}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{4512981A-2C60-4043-9493-173F0EA59B2B}|Chat.csproj|d:\\repos\\chat\\chat\\messagepage.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{4512981A-2C60-4043-9493-173F0EA59B2B}|Chat.csproj|solutionrelative:messagepage.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{4512981A-2C60-4043-9493-173F0EA59B2B}|Chat.csproj|d:\\repos\\chat\\chat\\app.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4512981A-2C60-4043-9493-173F0EA59B2B}|Chat.csproj|solutionrelative:app.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{4512981A-2C60-4043-9493-173F0EA59B2B}|Chat.csproj|d:\\repos\\chat\\chat\\messagepage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
       "RelativeMoniker": "D:0:0:{4512981A-2C60-4043-9493-173F0EA59B2B}|Chat.csproj|solutionrelative:messagepage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4512981A-2C60-4043-9493-173F0EA59B2B}|Chat.csproj|d:\\repos\\chat\\chat\\messagepage.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4512981A-2C60-4043-9493-173F0EA59B2B}|Chat.csproj|solutionrelative:messagepage.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -27,17 +27,19 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "AndroidManifest.xml",
-              "DocumentMoniker": "D:\\repos\\Chat\\Chat\\Platforms\\Android\\AndroidManifest.xml",
-              "RelativeDocumentMoniker": "Platforms\\Android\\AndroidManifest.xml",
-              "ToolTip": "D:\\repos\\Chat\\Chat\\Platforms\\Android\\AndroidManifest.xml",
-              "RelativeToolTip": "Platforms\\Android\\AndroidManifest.xml",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003576|",
-              "WhenOpened": "2024-06-24T10:28:14.934Z"
+              "Title": "App.xaml.cs",
+              "DocumentMoniker": "D:\\repos\\Chat\\Chat\\App.xaml.cs",
+              "RelativeDocumentMoniker": "App.xaml.cs",
+              "ToolTip": "D:\\repos\\Chat\\Chat\\App.xaml.cs",
+              "RelativeToolTip": "App.xaml.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAcAAAAiAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-24T10:59:49.788Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 1,
               "Title": "MessagePage.xaml",
               "DocumentMoniker": "D:\\repos\\Chat\\Chat\\MessagePage.xaml",
               "RelativeDocumentMoniker": "MessagePage.xaml",
@@ -50,7 +52,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "MessagePage.xaml.cs",
               "DocumentMoniker": "D:\\repos\\Chat\\Chat\\MessagePage.xaml.cs",
               "RelativeDocumentMoniker": "MessagePage.xaml.cs",
@@ -58,8 +60,7 @@
               "RelativeToolTip": "MessagePage.xaml.cs",
               "ViewState": "AQIAAH4AAAAAAAAAAAA3wEoBAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-24T09:08:57.413Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-06-24T09:08:57.413Z"
             }
           ]
         }

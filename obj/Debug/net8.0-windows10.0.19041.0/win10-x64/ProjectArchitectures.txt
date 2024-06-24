@@ -1,1 +1,0 @@
-D:\source\Visual Studio 2022\Chat\Chat.csproj;x64

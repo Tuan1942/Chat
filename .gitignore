@@ -1,0 +1,89 @@
+# Build Folders (you can edit these if you have a custom build output path)
+bin/
+obj/
+platforms/
+
+# User-specific files
+*.rsuser
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Mono Auto Generated Files
+mono_crash.*
+*.pidb
+*.svclog
+
+# Xamarin auto generated
+*.apk
+*.ap_ *.crash
+*.apk
+*.aab
+*.ipa
+*.mtbproj
+
+# Mac build generated
+Xamarin/
+*.xcodeproj
+*.xcworkspace
+*.xcuserstate
+
+# Visual Studio for Mac
+.vscode/
+*.pidb
+*.sln.ide.*
+.idea/
+.gradle/
+
+# JetBrains Rider
+.idea/
+
+# Android Studio
+.cxx/
+.externalNativeBuild/
+.cxx/
+.gradle/
+.localProperties
+/.gradle/
+.android/
+build/
+outputs/
+
+# Gradle files
+gradle-app.setting
+
+# External Libraries
+libs/
+
+# Node.js dependencies
+node_modules/
+npm-debug.log*
+yarn-error.log
+
+# Visual Studio Code
+.vscode/
+
+# Windows image file caches
+Thumbs.db
+ehthumbs.db
+
+# Folder config file
+Desktop.ini
+
+# Recycle Bin used on file shares
+$RECYCLE.BIN/
+
+# Windows Installer files
+*.cab
+*.msi
+*.msm
+*.msp
+
+# Windows shortcuts
+*.lnk
+
+# MAUI specific folders
+.platforms/
+.app/
+.bundle/

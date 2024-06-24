@@ -1,1 +1,0 @@
-<adaptive-icon xmlns:android="http://schemas.android.com/apk/res/android"><background android:drawable="@mipmap/tuna_background" /><foreground android:drawable="@mipmap/tuna_foreground" /><monochrome android:drawable="@mipmap/tuna_foreground" /></adaptive-icon>
