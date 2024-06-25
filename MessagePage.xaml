@@ -2,6 +2,7 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:Chat.ViewModel"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              x:Class="Chat.MessagePage"
              Title="{Binding FullName}">
     <ContentPage.Resources>
@@ -31,10 +32,18 @@
                                            HorizontalOptions="{Binding Alignment}" />
                                     <!--Hiển thị hình ảnh trên tin nhắn-->
                                     <Image Source="{Binding ImageSource}" 
-                                           IsVisible="{Binding IsNotTextMessage}" 
+                                           IsVisible="{Binding IsImageMessage}" 
                                            Aspect="AspectFit" 
                                            VerticalOptions="FillAndExpand"
                                            HorizontalOptions="{Binding Alignment}" />
+                                    <!--Hiển thị video trên tin nhắn-->
+                                    <toolkit:MediaElement x:Name="MessageVideo"
+                                                          Source="{Binding VideoSource}" 
+                                                          IsVisible="{Binding IsVideoMessage}" 
+                                                          Aspect="AspectFit" 
+                                                          VerticalOptions="FillAndExpand"
+                                                          HeightRequest="250"
+                                                          HorizontalOptions="{Binding Alignment}" />
                                     <!--Hiển thị mốc thời gian-->
                                     <Label Text="{Binding SentTime}" 
                                            FontSize="Micro" 
@@ -47,7 +56,7 @@
             </ListView.ItemTemplate>
         </ListView>
         <!--Gửi hình ảnh-->
-        <Grid x:Name="ImageEntry"
+        <Grid x:Name="PreviewRegion"
               Padding="10"
               IsVisible="False">
             <Grid.RowDefinitions>
@@ -61,16 +70,24 @@
                    HorizontalOptions="Center" 
                    VerticalOptions="Center" 
                    HeightRequest="200"/>
+            <toolkit:MediaElement x:Name="PreviewVideo"
+                                  Grid.Row="0"
+                                  Aspect="AspectFit" 
+                                  HorizontalOptions="Center" 
+                                  VerticalOptions="Center" 
+                                  HeightRequest="200"/>
+            <!-- Video xem trước -->
             <StackLayout Grid.Row="1" Orientation="Horizontal" 
-                 HorizontalOptions="End" VerticalOptions="Center"
+                         HorizontalOptions="End" VerticalOptions="Center"
                  Spacing="10">
-                <Button HeightRequest="50" x:Name="CancelImageButton" Text="Hủy" Clicked="OnCancelImageButtonClicked" />
-                <Button HeightRequest="50" x:Name="SendImageButton" Text="Gửi" Clicked="OnSendImageButtonClicked" />
+                <Button HeightRequest="50" x:Name="CancelImageButton" Text="Hủy" Clicked="OnCancelButtonClicked" />
+                <Button HeightRequest="50" x:Name="SendImageButton" Text="Gửi" Clicked="OnSendFileButtonClicked" />
             </StackLayout>
         </Grid>
         <!--Gửi tin nhắn-->
         <StackLayout Orientation="Horizontal" Padding="10">
-            <Button Text="📷" Clicked="OnSelectImageButtonClicked" />
+            <Button ImageSource="https://img.icons8.com/ios-filled/50/FFFFFF/camera.png" Clicked="OnSelectImageButtonClicked" />
+            <Button ImageSource="https://img.icons8.com/ios-filled/50/FFFFFF/video.png" Clicked="OnSelectVideoButtonClicked" />
             <Entry x:Name="MessageEntry" Placeholder="Nhập tin nhắn..." 
                    HorizontalOptions="FillAndExpand" />
             <Button Text="Gửi" Clicked="OnSendButtonClicked" />

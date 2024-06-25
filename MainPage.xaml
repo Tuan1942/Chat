@@ -3,14 +3,17 @@
              x:Class="Chat.MainPage"
              Title="Đoạn chat">
 
-    <ScrollView>
-        <!--Danh sách người dùng đã có trong hệ thống-->
-        <ListView x:Name="UserListView" ItemTapped="OnItemTapped">
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <TextCell Text="{Binding FullName}" Detail="{Binding CreatedAt}" />
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
-    </ScrollView>
+    <!--Danh sách người dùng đã có trong hệ thống-->
+    <ListView x:Name="UserListView" ItemTapped="OnItemTapped" VerticalOptions="FillAndExpand" HasUnevenRows="True">
+        <ListView.ItemTemplate>
+            <DataTemplate>
+                <ViewCell>
+                    <StackLayout Orientation="Vertical">
+                        <Label Text="{Binding FullName}" FontSize="Large" FontAttributes="Bold" />
+                        <Label Text="{Binding CreatedAt, StringFormat='Ngày tạo: {0:dd/MM/yyyy HH:mm}'}" TextColor="Gray" FontSize="Small" />
+                    </StackLayout>
+                </ViewCell>
+            </DataTemplate>
+        </ListView.ItemTemplate>
+    </ListView>
 </ContentPage>

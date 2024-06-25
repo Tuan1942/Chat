@@ -84,6 +84,5 @@ $RECYCLE.BIN/
 *.lnk
 
 # MAUI specific folders
-.platforms/
 .app/
 .bundle/

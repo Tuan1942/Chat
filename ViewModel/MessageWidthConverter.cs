@@ -6,7 +6,7 @@ namespace Chat.ViewModel
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (value is bool isImageMessage && isImageMessage)
+            if (value is bool IsNotTextMessage && IsNotTextMessage)
             {
                 return 250; 
             }
