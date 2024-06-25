@@ -1,0 +1,51 @@
+﻿@model AccountModel
+@{
+    ViewData["Title"] = "Account Manage";
+}
+<h1>@ViewData["Title"]</h1>
+<form asp-controller="User" asp-action="Update" method="post">
+    <input type="hidden" name="_method" value="PUT" />
+    <div class="col col-lg-6">
+        <div class="form-group mt-2">
+            <div class="d-flex flex-row align-items-center">
+                <i class="fas fa-user fa-lg me-3 fa-fw mt-4"></i>
+                <div data-mdb-input-init class="form-outline flex-fill mb-0">
+                    <label asp-for="Username">Tên người dùng:</label>
+                    <input asp-for="Username" class="form-control w-75" readonly />
+                    <span asp-validation-for="Username" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+        <div class="form-group mt-2">
+            <div class="d-flex flex-row align-items-center">
+                <i class="fas fa-user fa-lg me-3 fa-fw mt-4"></i>
+                <div data-mdb-input-init class="form-outline flex-fill mb-0">
+                    <label asp-for="FullName">Họ và tên:</label>
+                    <input asp-for="FullName" class="form-control w-75" />
+                    <span asp-validation-for="FullName" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+        <div class="form-group mt-2">
+            <div class="d-flex flex-row align-items-center">
+                <i class="fas fa-lock fa-lg me-3 fa-fw mt-4"></i>
+                <div data-mdb-input-init class="form-outline flex-fill mb-0">
+                    <label asp-for="Password">Mật khẩu</label>
+                    <input asp-for="Password" class="form-control w-75" type="password" />
+                    <span asp-validation-for="Password" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+        <div class="form-group mt-2">
+            <div class="d-flex flex-row align-items-center">
+                <i class="fas fa-key fa-lg me-3 fa-fw mt-4"></i>
+                <div data-mdb-input-init class="form-outline flex-fill mb-0">
+                    <label asp-for="ConfirmPassword">Nhập lại mật khẩu</label>
+                    <input asp-for="ConfirmPassword" class="form-control w-75" type="password" />
+                    <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary mt-4">Cập nhật tài khoản</button>
+    </div>
+</form>

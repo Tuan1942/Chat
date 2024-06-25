@@ -1,0 +1,82 @@
+﻿@model RegisterModel
+
+@{
+    ViewData["Title"] = "Đăng ký";
+}
+<br />
+<br />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+      integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+      crossorigin="anonymous" referrerpolicy="no-referrer" />
+      <form asp-controller="User" asp-action="Register" method="post">
+    <div class="row">
+        <div class="col col-lg-6 ">
+            <div class="form-group mt-2">
+                <div class="d-flex flex-row align-items-center">
+                    <i class="fas fa-user fa-lg me-3 fa-fw mt-4"></i>
+                    <div data-mdb-input-init class="form-outline flex-fill mb-0">
+                        <label asp-for="Username">Tên người dùng:</label>
+                        <input asp-for="Username" class="form-control w-75" />
+                        <span asp-validation-for="Username" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group mt-2">
+                <div class="d-flex flex-row align-items-center">
+                    <i class="fas fa-user fa-lg me-3 fa-fw mt-4"></i>
+                    <div data-mdb-input-init class="form-outline flex-fill mb-0">
+                        <label asp-for="FullName">Họ và tên:</label>
+                        <input asp-for="FullName" class="form-control w-75" />
+                        <span asp-validation-for="FullName" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group mt-2">
+                <div class="d-flex flex-row align-items-center">
+                    <i class="fas fa-lock fa-lg me-3 fa-fw mt-4"></i>
+                    <div data-mdb-input-init class="form-outline flex-fill mb-0">
+                        <label asp-for="Password">Mật khẩu</label>
+                        <input asp-for="Password" class="form-control w-75" type="password" />
+                        <span asp-validation-for="Password" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group mt-2">
+                <div class="d-flex flex-row align-items-center">
+                    <i class="fas fa-key fa-lg me-3 fa-fw mt-4"></i>
+                    <div data-mdb-input-init class="form-outline flex-fill mb-0">
+                        <label asp-for="ConfirmPassword">Nhập lại mật khẩu</label>
+                        <input asp-for="ConfirmPassword" class="form-control w-75" type="password" />
+                        <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+@*             <div class="form-check d-flex justify-content-start mt-2">
+                <input class="form-check-input me-2" type="checkbox" value="" id="service" />
+                <label class="form-check-label" for="service">
+                    Đồng ý về <a href="#!">Điều khoản và dịch vụ</a>
+                </label>
+            </div>
+ *@            <button type="submit" class="btn btn-primary mt-4">Đăng ký</button>
+            <div class="text-center text-lg-start">
+                <p class="fw-bold mt-2 pt-1 mb-0">
+                    Đã có tài khoản? <a href="../Home/Login" class="link">Đăng nhập</a>
+                </p>
+            </div>
+        </div>
+        <div class="col col-lg-6 ">
+            <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-registration/draw1.webp" class="img-fluid" alt="img">
+        </div>
+    </div>
+</form>
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
+
+
+
+
+
+

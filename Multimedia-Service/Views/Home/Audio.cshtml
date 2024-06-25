@@ -1,0 +1,71 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload Audio</title>
+</head>
+<body>
+    <h1>Upload Audio from Microphone</h1>
+    <button id="start">Start Recording</button>
+    <button id="stop" disabled>Stop Recording</button>
+    <button id="upload" disabled>Upload Audio</button>
+
+    <script>
+        const startButton = document.getElementById('start');
+        const stopButton = document.getElementById('stop');
+        const uploadButton = document.getElementById('upload');
+        let mediaRecorder;
+        let recordedBlobs = [];
+
+        async function init() {
+            const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+            mediaRecorder = new MediaRecorder(stream);
+
+            mediaRecorder.ondataavailable = (event) => {
+                if (event.data && event.data.size > 0) {
+                    recordedBlobs.push(event.data);
+                }
+            };
+
+            mediaRecorder.onstop = () => {
+                uploadButton.disabled = false;
+            };
+        }
+
+        startButton.addEventListener('click', () => {
+            recordedBlobs = [];
+            mediaRecorder.start();
+            startButton.disabled = true;
+            stopButton.disabled = false;
+            console.log('MediaRecorder started', mediaRecorder);
+        });
+
+        stopButton.addEventListener('click', () => {
+            mediaRecorder.stop();
+            startButton.disabled = false;
+            stopButton.disabled = true;
+            console.log('MediaRecorder stopped', mediaRecorder);
+        });
+
+        uploadButton.addEventListener('click', async () => {
+            const blob = new Blob(recordedBlobs, { type: 'audio/wav' });
+            const formData = new FormData();
+            formData.append('audio', blob, 'audio.wav');
+
+            try {
+                const response = await fetch('/api/audio/upload', {
+                    method: 'POST',
+                    body: formData
+                });
+                const result = await response.json();
+                console.log('Success:', result);
+            } catch (error) {
+                console.error('Error:', error);
+            }
+        });
+
+        init().catch(console.error);
+    </script>
+</body>
+</html>

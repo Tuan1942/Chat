@@ -1,0 +1,341 @@
+﻿@model Home
+@using System.Security.Claims
+@{
+    var currentUserId = Model.HttpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Auto Renew Messages</title>
+    <style>
+        .message-container {
+            display: flex;
+            flex-direction: column;
+        }
+
+        #messages-list {
+            overflow-x: hidden;
+            padding: 10px;
+        }
+
+        .message {
+            margin-bottom: 10px;
+            width: 70%;
+            padding: 10px;
+            border-radius: 10px;
+        }
+
+        .message-time{
+            font-size: 12px;
+            color: #6c757d !important;
+        }
+
+            .message.sent {
+                /* background-color: #d1ffd6; */
+                background-color: #1eff0066;
+                align-self: flex-start;
+                text-align: left;
+            }
+
+            .message.received {
+                background-color: #e8e8e8;
+                align-self: flex-end;
+                text-align: right;
+            }
+
+            .message img, .message video {
+                max-width: 100%;
+                height: auto;
+                display: block;
+                margin: 0 auto;
+            }
+
+        .modal-header {
+            margin-top: 70px; 
+        }
+
+        .user-item.active .text-muted {
+            color: #FFF !important;
+        }
+    </style>
+</head>
+<body>
+    <div class="container ">
+        <div class="row">
+            <!--Messages-->
+            <div class="col-md-9">
+                <div class="">
+                    <h5 class="modal-title" id="chatModalLabel"> <span id="chatUser"></span></h5>
+                    <h2>Messages</h2>
+                </div>
+                <div class="modal-body" style="display:none;" id="messageBox">
+                    <!-- Chat content goes here -->
+                    <div id="chatContent" style="height: 70vh; overflow-y: auto;">
+                        <div id="message-container">
+                            <div class="message-container" id="messages-list"></div>
+                        </div>
+                    </div>
+                    <form class="input-group mt-3" asp-controller="Message" asp-action="Send" method="post">
+                        <input type="hidden" id="SendId" name="SendId" value="@currentUserId">
+                        <input type="hidden" id="ReceiveId" name="ReceiveId" value="">
+                        <input type="hidden" id="Type" name="Type" value="Message">
+                        <input type="text" id="Value" name="Value" class="form-control" placeholder="Nhập tin nhắn">
+                        <button id="send-message" class="btn btn-primary" type="button">Gửi</button>
+                    </form>
+                    <form id="uploadForm" action="" method="post" enctype="multipart/form-data">
+                        <input type="file" id="inputFile" name="file" accept="file_extension|audio/*|video/*|image/*|media_type">
+                        <input type="hidden" id="SendIdFile" name="sendId" value="@currentUserId">
+                        <input type="hidden" id="ReceiveIdFile" name="receiveId" value="">
+                        <input type="hidden" id="FileType" value="" />
+                        <button id="send-file" class="btn btn-danger" type="submit">Gửi tệp</button>
+                    </form>
+                    <div id="preview"></div>
+
+                    <div id="preview"></div>
+                    <input type="hidden" id="FileType" value="" />
+                </div>
+            </div>
+            <!--UserList-->
+            <div class="col-md-3">
+                <div class="position-fixed" style="top: 70px; width: 25%;">
+                    @if (Model != null && Model.Users != null)
+                    {
+                        <details>
+                        <summary>Danh sách liên hệ:</summary>
+                        <div class="overflow-auto" style="height: 80vh;">
+                            <div class="list-group">
+                                @foreach (var user in Model.Users)
+                                {
+                                    <a href="#" data-id="@user.Id" class="list-group-item list-group-item-action user-item" >
+                                        <div class="d-flex w-100 justify-content-between">
+                                            <h5 class="mb-1">@user.FullName</h5>
+                                        </div>
+                                        <small class="text-muted">Tham gia vào: @user.CreatedAt.ToString("dd MMMM, yyyy")</small>
+                                    </a>
+                                }
+                            </div>
+                            </div>
+                        </details>
+                    }
+                    else
+                    {
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @section Scripts {
+        <script>
+            $(document).ready(function () {
+                var currentUserId = '@currentUserId';
+                var currentChatUserId = null;
+                var currentMessageCount = 0;
+
+                function appendMessages(messages) {
+                    messages.reverse(); 
+                    messages.forEach(function (message) {
+                        var messageHtml = '';
+                        var isSent = message.sendId == currentUserId;
+
+                        if (message.type === 'Image') {
+                            var imageUrl = message.value;
+                            messageHtml = `<div class="message ${isSent ? 'sent' : 'received'}"><img src="/Image/${imageUrl}" alt="Image" /><div class="message-time">${message.sentTime}</div></div>`;
+                        } else if (message.type === 'Audio') {
+                            var audioUrl = message.value;
+                            messageHtml = `<div class="message ${isSent ? 'sent' : 'received'}"><audio controls><source src="/Audio/${audioUrl}" type="audio/mpeg">Your browser does not support the audio element.</audio><div class="message-time">${message.sentTime}</div></div>`;
+                        } else if (message.type === 'Video') {
+                            var videoUrl = message.value;
+                            messageHtml = `<div class="message ${isSent ? 'sent' : 'received'}"><video controls><source src="/Video/${videoUrl}" type="video/mp4">Your browser does not support the video element.</video><div class="message-time">${message.sentTime}</div></div>`;
+                        } else {
+                            messageHtml = `<div class="message ${isSent ? 'sent' : 'received'}">${message.value}<div class="message-time">${message.sentTime}</div></div>`;
+                        }
+
+                        $('#messages-list').prepend(messageHtml); // Prepend each message
+                    });
+                }
+
+                function updateMessages() {
+                    if (currentChatUserId) {
+                        console.log("Updating messages for chat user ID:", currentChatUserId); 
+                        var chatContent = document.getElementById('chatContent');
+                        var scrollPosition = chatContent.scrollTop;
+
+                        $.ajax({
+                            url: `/Message/?sendId=${currentUserId}&receiveId=${currentChatUserId}`,
+                            method: 'GET',
+                            success: function (data) {
+                                if (data.length > currentMessageCount || data.length == 0) {
+                                    $('#messages-list').empty();
+                                    appendMessages(data);
+                                    chatContent.scrollTop = chatContent.scrollHeight; // Optionally adjust scroll
+                                }
+                                currentMessageCount = data.length; // Update the current message count
+                            }
+                        });
+                    }
+                }
+
+                // Open message
+                $('.user-item').click(function () {
+                    var userId = $(this).data('id');
+                    $('.user-item').removeClass('active');
+                    $(this).addClass('active');
+                    $('#chatUser').text($(this).text());
+
+                    var inputElement = document.getElementById("ReceiveId");
+                    inputElement.value = userId;
+                    var messageBox = document.getElementById("messageBox");
+                    messageBox.style.display = "block";
+                    document.getElementById("ReceiveIdFile").value = userId;
+                    currentChatUserId = userId;
+                    currentMessageCount = 0; // Reset message count when switching users
+
+                    updateMessages();
+                });
+
+                $('#send-message').click(function () {
+                    var messageValue = $('#Value').val();
+                    var receiveId = $('#ReceiveId').val();
+                    var type = $('#Type').val();
+
+                    if (messageValue && receiveId) {
+                        $.ajax({
+                            url: '/Message/SendMessage',
+                            method: 'POST',
+                            contentType: 'application/json',
+                            data: JSON.stringify({
+                                sendId: currentUserId,
+                                receiveId: receiveId,
+                                type: type,
+                                value: messageValue
+                            }),
+                            success: function () {
+                                $('#Value').val('');
+                                updateMessages();
+                            }
+                        });
+                    }
+                });
+
+                // Preview image, video, and audio
+                document.getElementById('inputFile').addEventListener('change', function () {
+                    var file = this.files[0];
+                    var fileType = file.type;
+
+                    var fileTypeInput = document.getElementById('FileType');
+                    var inputFile = document.getElementById('inputFile');
+                    var sendFileButton = document.getElementById('send-file');
+                    if (fileType && fileType.split('/')[0] === 'audio') {
+                        fileTypeInput.value = 'Audio';
+                        inputFile.name = 'audio';
+                        sendFileButton.disabled = false;
+                    } else if (fileType && fileType.split('/')[0] === 'video') {
+                        fileTypeInput.value = 'Video';
+                        inputFile.name = 'video';
+                        sendFileButton.disabled = false;
+                    } else if (fileType && fileType.split('/')[0] === 'image') {
+                        fileTypeInput.value = 'Image';
+                        inputFile.name = 'image';
+                        sendFileButton.disabled = false;
+                    } else {
+                        fileTypeInput.value = 'Other';
+                        inputFile.name = 'file';
+                        sendFileButton.disabled = true;
+                    }
+
+                    if (fileType && (fileType.split('/')[0] === 'audio' || fileType.split('/')[0] === 'video')) {
+                        var reader = new FileReader();
+
+                        reader.onload = function (e) {
+                            var preview = document.getElementById('preview');
+                            preview.innerHTML = '';
+
+                            if (fileType.split('/')[0] === 'audio') {
+                                var audio = document.createElement('audio');
+                                audio.controls = true;
+                                audio.src = e.target.result;
+                                preview.appendChild(audio);
+                            } else {
+                                var video = document.createElement('video');
+                                video.controls = true;
+                                video.src = e.target.result;
+                                video.style.maxWidth = '100%';
+                                video.style.maxHeight = '200px';
+                                preview.appendChild(video);
+                            }
+                        };
+
+                        reader.readAsDataURL(file);
+                    } else if (fileType && fileType.split('/')[0] === 'image') {
+                        var reader = new FileReader();
+
+                        reader.onload = function (e) {
+                            var preview = document.getElementById('preview');
+                            preview.innerHTML = '';
+
+                            var img = document.createElement('img');
+                            img.src = e.target.result;
+                            img.style.maxWidth = '100%';
+                            img.style.maxHeight = '200px';
+                            preview.appendChild(img);
+                        };
+
+                        reader.readAsDataURL(file);
+                    } else {
+                        var preview = document.getElementById('preview');
+                        preview.innerHTML = '<p>This file type is not supported for preview.</p>';
+                    }
+                });
+
+                // Send file
+                document.getElementById('send-file').addEventListener('click', function (event) {
+                    event.preventDefault();
+                    var fileType = document.getElementById('FileType').value;
+                    var form = document.getElementById('uploadForm');
+
+                    var receiveIdFile = document.getElementById('ReceiveIdFile').value;
+                    var sendIdFile = document.getElementById('SendIdFile').value;
+
+                    if (!receiveIdFile || !sendIdFile) {
+                        document.getElementById('send-file').disabled = true;
+                        return;
+                    }
+
+                    document.getElementById('send-file').disabled = false;
+
+                    if (fileType === 'Image') {
+                        form.action = '/Image/Upload';
+                    } else if (fileType === 'Audio') {
+                        form.action = '/Audio/Upload';
+                    } else if (fileType === 'Video') {
+                        form.action = '/Video/Upload';
+                    } else {
+                        form.action = '/Other/Upload';
+                    }
+
+                    var formData = new FormData(form);
+                    $.ajax({
+                        url: form.action,
+                        type: 'POST',
+                        data: formData,
+                        contentType: false,
+                        processData: false,
+                        success: function () {
+                            updateMessages();
+                            document.getElementById('preview').innerHTML = '';
+                            document.getElementById('send-file').disabled = true;
+                            document.getElementById('inputFile').value = '';
+                        }
+                    });
+                });
+
+                // Automatically update messages every 5 seconds
+                setInterval(updateMessages, 5000);
+            });
+        </script>
+    }
+</body>
+</html>

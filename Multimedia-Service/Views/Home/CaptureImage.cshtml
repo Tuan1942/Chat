@@ -1,0 +1,58 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload Image</title>
+</head>
+<body>
+    <h1>Upload Image from Camera</h1>
+    <video id="video" width="320" height="240" autoplay></video>
+    <canvas id="canvas" width="320" height="240" style="display: none;"></canvas>
+    <button id="capture">Capture Image</button>
+    <button id="upload">Upload Image</button>
+    <script>
+        const videoElement = document.getElementById('video');
+        const canvasElement = document.getElementById('canvas');
+        const captureButton = document.getElementById('capture');
+        const uploadButton = document.getElementById('upload');
+        const context = canvasElement.getContext('2d');
+        let capturedImage;
+
+        async function init() {
+            const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+            videoElement.srcObject = stream;
+        }
+
+        captureButton.addEventListener('click', () => {
+            context.drawImage(videoElement, 0, 0, canvasElement.width, canvasElement.height);
+            capturedImage = canvasElement.toDataURL('image/png');
+        });
+
+        uploadButton.addEventListener('click', async () => {
+            if (!capturedImage) {
+                console.error('No image captured.');
+                return;
+            }
+
+            const response = await fetch(capturedImage);
+            const blob = await response.blob();
+            const formData = new FormData();
+            formData.append('image', blob, 'image.png');
+
+            try {
+                const response = await fetch('/api/image/upload', {
+                    method: 'POST',
+                    body: formData
+                });
+                const result = await response.json();
+                console.log('Success:', result);
+            } catch (error) {
+                console.error('Error:', error);
+            }
+        });
+
+        init().catch(console.error);
+    </script>
+</body>
+</html>

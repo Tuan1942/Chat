@@ -1,0 +1,73 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload Video</title>
+</head>
+<body>
+    <h1>Upload Video from Camera</h1>
+    <video id="video" width="320" height="240" autoplay></video>
+    <button id="start">Start Recording</button>
+    <button id="stop">Stop Recording</button>
+    <button id="upload">Upload Video</button>
+    <script>
+        const videoElement = document.getElementById('video');
+        const startButton = document.getElementById('start');
+        const stopButton = document.getElementById('stop');
+        const uploadButton = document.getElementById('upload');
+        let mediaRecorder;
+        let recordedBlobs = [];
+
+        async function init() {
+            const stream = await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
+            videoElement.srcObject = stream;
+
+            mediaRecorder = new MediaRecorder(stream);
+            mediaRecorder.ondataavailable = (event) => {
+                if (event.data && event.data.size > 0) {
+                    recordedBlobs.push(event.data);
+                }
+            };
+        }
+
+        startButton.addEventListener('click', () => {
+            if (mediaRecorder.state !== 'recording') {
+                recordedBlobs = [];
+                mediaRecorder.start();
+                console.log('MediaRecorder started', mediaRecorder);
+            } else {
+                console.log('MediaRecorder is already recording.');
+            }
+        });
+
+        stopButton.addEventListener('click', () => {
+            if (mediaRecorder.state === 'recording') {
+                mediaRecorder.stop();
+                console.log('MediaRecorder stopped', mediaRecorder);
+            } else {
+                console.log('MediaRecorder is not recording.');
+            }
+        });
+
+        uploadButton.addEventListener('click', async () => {
+            const blob = new Blob(recordedBlobs, { type: 'video/mp4' });
+            const formData = new FormData();
+            formData.append('video', blob, 'video.mp4');
+
+            try {
+                const response = await fetch('/api/video/upload', {
+                    method: 'POST',
+                    body: formData
+                });
+                const result = await response.json();
+                console.log('Success:', result);
+            } catch (error) {
+                console.error('Error:', error);
+            }
+        });
+
+        init().catch(console.error);
+    </script>
+</body>
+</html>

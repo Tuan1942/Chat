@@ -1,0 +1,23 @@
+﻿<ul class="navbar-nav">
+    @if (User.Identity.IsAuthenticated)
+    {
+        <li class="nav-item">
+            <a class="nav-link text-dark" href="../Home/Account">@User.Identity.Name</a>
+        </li>
+        <li class="nav-item">
+            <form class="form-inline" asp-controller="User" asp-action="Logout" method="post" class="form-inline">
+                <button class="nav-link btn btn-link text-dark border-0" type="submit" class="btn btn-link navbar-btn">Đăng xuất</button>
+            </form>
+        </li>
+    }
+    else
+    {
+        <li class="nav-item">
+            <a class="nav-link text-dark" asp-controller="Home" asp-action="Login">Đăng nhập</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-dark" asp-controller="Home" asp-action="Register">Đăng ký</a>
+        </li>
+    }
+</ul>
+
