@@ -1,7 +1,6 @@
 # Build Folders (you can edit these if you have a custom build output path)
 bin/
 obj/
-platforms/
 
 # User-specific files
 *.rsuser
