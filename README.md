@@ -2,7 +2,7 @@ Project Overview:
 A chat website, allowing the sending of multimedia files. It leverages ASP.NET Core for the backend, Entity Framework Core for data access, and FFmpeg for media processing tasks including compression and metadata management.  
   
 Demo video:  
-  Website: https://drive.google.com/file/d/1-2b8oeDvOnLlQntrNaQmenXF-WMdfibZ/view?usp=sharing
+  Website: https://drive.google.com/file/d/1-2b8oeDvOnLlQntrNaQmenXF-WMdfibZ/view?usp=sharing  
   Android: https://drive.google.com/file/d/1tm-Gsk6pKMrl1XU6O2rIcQtsAp6XKB78/view?usp=sharing  
   
 User Authentication:  
