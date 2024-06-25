@@ -15,7 +15,7 @@
         public bool IsVideoMessage => Type == "Video";
         public bool IsNotTextMessage => Type != "Message";
         public string ImageSource => Type == "Image" ? Connection.Server + "Image/" + Value : null; // Nếu tin nhắn là hình ảnh, Lấy hình ảnh đó đưa vào Image Source 
-        public string VideoSource => Type == "Video" ? Connection.Server + "Video/" + Value : null; // Nếu tin nhắn là hình ảnh, Lấy hình ảnh đó đưa vào Image Source 
+        public string VideoSource => Type == "Video" ? Connection.Server + "Video/" + Value : null;
 
         public LayoutOptions Alignment => IsIncoming ? LayoutOptions.End : LayoutOptions.Start;
         public LayoutOptions TextAlignment => IsIncoming ? LayoutOptions.Start : LayoutOptions.End;

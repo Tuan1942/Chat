@@ -55,42 +55,48 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-        <!--Gửi hình ảnh-->
-        <Grid x:Name="PreviewRegion"
-              Padding="10"
-              IsVisible="False">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-            </Grid.RowDefinitions>
-            <!-- Hình ảnh xem trước -->
-            <Image x:Name="PreviewImage" 
-                   Grid.Row="0"
-                   Aspect="AspectFit" 
-                   HorizontalOptions="Center" 
-                   VerticalOptions="Center" 
-                   HeightRequest="200"/>
-            <toolkit:MediaElement x:Name="PreviewVideo"
-                                  Grid.Row="0"
-                                  Aspect="AspectFit" 
-                                  HorizontalOptions="Center" 
-                                  VerticalOptions="Center" 
-                                  HeightRequest="200"/>
-            <!-- Video xem trước -->
-            <StackLayout Grid.Row="1" Orientation="Horizontal" 
-                         HorizontalOptions="End" VerticalOptions="Center"
-                 Spacing="10">
-                <Button HeightRequest="50" x:Name="CancelImageButton" Text="Hủy" Clicked="OnCancelButtonClicked" />
-                <Button HeightRequest="50" x:Name="SendImageButton" Text="Gửi" Clicked="OnSendFileButtonClicked" />
+        <StackLayout Background="AliceBlue">
+            <!--Gửi tệp-->
+            <Grid x:Name="PreviewRegion"
+                  Padding="10"
+                  IsVisible="False">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <!-- Hình ảnh xem trước -->
+                <Image x:Name="PreviewImage" 
+                       Grid.Row="0"
+                       Aspect="AspectFit" 
+                       HorizontalOptions="Center" 
+                       VerticalOptions="Center" 
+                       HeightRequest="200"/>
+                <toolkit:MediaElement x:Name="PreviewVideo"
+                                      Grid.Row="0"
+                                      Aspect="AspectFit" 
+                                      HorizontalOptions="Center" 
+                                      VerticalOptions="Center" 
+                                      HeightRequest="200"/>
+                <!-- Video xem trước -->
+                <StackLayout Grid.Row="1" Orientation="Horizontal" 
+                             HorizontalOptions="End" VerticalOptions="Center"
+                     Spacing="10">
+                    <Button Background="Red" HeightRequest="50" x:Name="CancelImageButton" Text="Hủy" Clicked="OnCancelButtonClicked" />
+                    <Button HeightRequest="50" x:Name="SendImageButton" Text="Gửi" Clicked="OnSendFileButtonClicked" />
+                </StackLayout>
+            </Grid>
+            <!--Gửi tin nhắn-->
+            <StackLayout Orientation="Horizontal"
+                         BackgroundColor="LightGray"
+                         Padding="10">
+                <Button ImageSource="https://img.icons8.com/ios-filled/50/FFFFFF/camera.png" Clicked="OnSelectImageButtonClicked" />
+                <Button ImageSource="https://img.icons8.com/ios-filled/50/FFFFFF/video.png" Clicked="OnSelectVideoButtonClicked" />
+                <Entry x:Name="MessageEntry" 
+                       PlaceholderColor="AntiqueWhite"
+                       Placeholder="Nhập tin nhắn..." 
+                       HorizontalOptions="FillAndExpand" />
+                <Button Text="Gửi" Clicked="OnSendButtonClicked" />
             </StackLayout>
-        </Grid>
-        <!--Gửi tin nhắn-->
-        <StackLayout Orientation="Horizontal" Padding="10">
-            <Button ImageSource="https://img.icons8.com/ios-filled/50/FFFFFF/camera.png" Clicked="OnSelectImageButtonClicked" />
-            <Button ImageSource="https://img.icons8.com/ios-filled/50/FFFFFF/video.png" Clicked="OnSelectVideoButtonClicked" />
-            <Entry x:Name="MessageEntry" Placeholder="Nhập tin nhắn..." 
-                   HorizontalOptions="FillAndExpand" />
-            <Button Text="Gửi" Clicked="OnSendButtonClicked" />
         </StackLayout>
     </StackLayout>
 </ContentPage>

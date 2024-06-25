@@ -3,36 +3,28 @@
   "WorkspaceRootPath": "D:\\repos\\Chat\\Chat\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{4512981A-2C60-4043-9493-173F0EA59B2B}|Chat.csproj|d:\\repos\\chat\\chat\\.gitignore||{3B902123-F8A7-4915-9F01-361F908088D0}",
-      "RelativeMoniker": "D:0:0:{4512981A-2C60-4043-9493-173F0EA59B2B}|Chat.csproj|solutionrelative:.gitignore||{3B902123-F8A7-4915-9F01-361F908088D0}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{4512981A-2C60-4043-9493-173F0EA59B2B}|Chat.csproj|d:\\repos\\chat\\chat\\messagepage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
       "RelativeMoniker": "D:0:0:{4512981A-2C60-4043-9493-173F0EA59B2B}|Chat.csproj|solutionrelative:messagepage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{4512981A-2C60-4043-9493-173F0EA59B2B}|Chat.csproj|d:\\repos\\chat\\chat\\mainpage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
-      "RelativeMoniker": "D:0:0:{4512981A-2C60-4043-9493-173F0EA59B2B}|Chat.csproj|solutionrelative:mainpage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{4512981A-2C60-4043-9493-173F0EA59B2B}|Chat.csproj|d:\\repos\\chat\\chat\\viewmodel\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{4512981A-2C60-4043-9493-173F0EA59B2B}|Chat.csproj|solutionrelative:viewmodel\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{4512981A-2C60-4043-9493-173F0EA59B2B}|Chat.csproj|d:\\repos\\chat\\chat\\mainpage.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{4512981A-2C60-4043-9493-173F0EA59B2B}|Chat.csproj|solutionrelative:mainpage.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{4512981A-2C60-4043-9493-173F0EA59B2B}|Chat.csproj|d:\\repos\\chat\\chat\\messagepage.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{4512981A-2C60-4043-9493-173F0EA59B2B}|Chat.csproj|solutionrelative:messagepage.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{4512981A-2C60-4043-9493-173F0EA59B2B}|Chat.csproj|d:\\repos\\chat\\chat\\viewmodel\\message.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{4512981A-2C60-4043-9493-173F0EA59B2B}|Chat.csproj|solutionrelative:viewmodel\\message.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{4512981A-2C60-4043-9493-173F0EA59B2B}|Chat.csproj|d:\\repos\\chat\\chat\\mauiprogram.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{4512981A-2C60-4043-9493-173F0EA59B2B}|Chat.csproj|solutionrelative:mauiprogram.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{4512981A-2C60-4043-9493-173F0EA59B2B}|Chat.csproj|d:\\repos\\chat\\chat\\mainpage.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4512981A-2C60-4043-9493-173F0EA59B2B}|Chat.csproj|solutionrelative:mainpage.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4512981A-2C60-4043-9493-173F0EA59B2B}|Chat.csproj|d:\\repos\\chat\\chat\\mainpage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{4512981A-2C60-4043-9493-173F0EA59B2B}|Chat.csproj|solutionrelative:mainpage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4512981A-2C60-4043-9493-173F0EA59B2B}|Chat.csproj|d:\\repos\\chat\\chat\\messagepage.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4512981A-2C60-4043-9493-173F0EA59B2B}|Chat.csproj|solutionrelative:messagepage.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4512981A-2C60-4043-9493-173F0EA59B2B}|Chat.csproj|d:\\repos\\chat\\chat\\viewmodel\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4512981A-2C60-4043-9493-173F0EA59B2B}|Chat.csproj|solutionrelative:viewmodel\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -42,24 +34,11 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 4,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": ".gitignore",
-              "DocumentMoniker": "D:\\repos\\Chat\\Chat\\.gitignore",
-              "RelativeDocumentMoniker": ".gitignore",
-              "ToolTip": "D:\\repos\\Chat\\Chat\\.gitignore",
-              "RelativeToolTip": ".gitignore",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA8AAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
-              "WhenOpened": "2024-06-25T05:44:02.646Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 5,
               "Title": "User.cs",
               "DocumentMoniker": "D:\\repos\\Chat\\Chat\\ViewModel\\User.cs",
               "RelativeDocumentMoniker": "ViewModel\\User.cs",
@@ -71,20 +50,20 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 3,
               "Title": "MainPage.xaml",
               "DocumentMoniker": "D:\\repos\\Chat\\Chat\\MainPage.xaml",
               "RelativeDocumentMoniker": "MainPage.xaml",
               "ToolTip": "D:\\repos\\Chat\\Chat\\MainPage.xaml",
               "RelativeToolTip": "MainPage.xaml",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA4AAAAbAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA8AAAAbAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
               "WhenOpened": "2024-06-25T05:05:52.651Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 2,
               "Title": "MainPage.xaml.cs",
               "DocumentMoniker": "D:\\repos\\Chat\\Chat\\MainPage.xaml.cs",
               "RelativeDocumentMoniker": "MainPage.xaml.cs",
@@ -92,56 +71,47 @@
               "RelativeToolTip": "MainPage.xaml.cs",
               "ViewState": "AQIAACYAAAAAAAAAAAAkwCwAAAAQAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-25T05:04:21.453Z"
+              "WhenOpened": "2024-06-25T05:04:21.453Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 1,
               "Title": "Message.cs",
               "DocumentMoniker": "D:\\repos\\Chat\\Chat\\ViewModel\\Message.cs",
               "RelativeDocumentMoniker": "ViewModel\\Message.cs",
               "ToolTip": "D:\\repos\\Chat\\Chat\\ViewModel\\Message.cs",
               "RelativeToolTip": "ViewModel\\Message.cs",
-              "ViewState": "AQIAAAIAAAAAAAAAAAA4wA8AAAA6AAAA",
+              "ViewState": "AQIAAAMAAAAAAAAAAAAcwA0AAAA2AAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-25T03:44:58.098Z"
+              "WhenOpened": "2024-06-25T03:44:58.098Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "MauiProgram.cs",
-              "DocumentMoniker": "D:\\repos\\Chat\\Chat\\MauiProgram.cs",
-              "RelativeDocumentMoniker": "MauiProgram.cs",
-              "ToolTip": "D:\\repos\\Chat\\Chat\\MauiProgram.cs",
-              "RelativeToolTip": "MauiProgram.cs",
-              "ViewState": "AQIAAAMAAAAAAAAAAAAgwBMAAAA3AAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-25T03:36:21.724Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 0,
               "Title": "MessagePage.xaml",
               "DocumentMoniker": "D:\\repos\\Chat\\Chat\\MessagePage.xaml",
               "RelativeDocumentMoniker": "MessagePage.xaml",
               "ToolTip": "D:\\repos\\Chat\\Chat\\MessagePage.xaml",
               "RelativeToolTip": "MessagePage.xaml",
-              "ViewState": "AQIAAEgAAAAAAAAAAAAowFgAAABYAAAA",
+              "ViewState": "AQIAADYAAAAAAAAAAAAAAGEAAABDAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
               "WhenOpened": "2024-06-24T09:16:07.091Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 4,
               "Title": "MessagePage.xaml.cs",
               "DocumentMoniker": "D:\\repos\\Chat\\Chat\\MessagePage.xaml.cs",
               "RelativeDocumentMoniker": "MessagePage.xaml.cs",
               "ToolTip": "D:\\repos\\Chat\\Chat\\MessagePage.xaml.cs",
               "RelativeToolTip": "MessagePage.xaml.cs",
-              "ViewState": "AQIAAGUAAAAAAAAAAAAiwNYAAAAPAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAD0AAAAuAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-24T09:08:57.413Z"
+              "WhenOpened": "2024-06-24T09:08:57.413Z",
+              "EditorCaption": ""
             }
           ]
         }
