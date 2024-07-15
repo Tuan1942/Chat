@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using MultimediaService.Context;
 using MultimediaService.Cookie;
+using MultimediaService.WebSockets;
 using System.IdentityModel.Tokens.Jwt;
 using System.Text;
 
@@ -44,6 +45,8 @@ builder.Services.AddAuthentication(options =>
 
 var app = builder.Build();
 app.UseMiddleware<JwtCookieMiddleware>();
+app.UseWebSockets();
+app.UseMiddleware<WebSocketMiddleware>();
 
 if (!app.Environment.IsDevelopment())
 {

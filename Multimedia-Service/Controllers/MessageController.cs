@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MultimediaService.Context;
+using MultimediaService.WebSockets;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
@@ -100,6 +101,7 @@ namespace MultimediaService.Controllers
 
             _context.Messages.Add(message);
             await _context.SaveChangesAsync();
+            await WebSocketMiddleware.NotifyUser(message.ReceiveId.ToString(), "refresh");
 
             return NoContent();
         }

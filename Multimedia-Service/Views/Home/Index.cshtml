@@ -1,5 +1,6 @@
 ﻿@model Home
 @using System.Security.Claims
+
 @{
     var currentUserId = Model.HttpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
 }
@@ -10,6 +11,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Auto Renew Messages</title>
     <style>
+        /* CSS styles */
         .message-container {
             display: flex;
             flex-direction: column;
@@ -27,33 +29,32 @@
             border-radius: 10px;
         }
 
-        .message-time{
+        .message-time {
             font-size: 12px;
             color: #6c757d !important;
         }
 
-            .message.sent {
-                /* background-color: #d1ffd6; */
-                background-color: #1eff0066;
-                align-self: flex-start;
-                text-align: left;
-            }
+        .message.sent {
+            background-color: #1eff0066;
+            align-self: flex-start;
+            text-align: left;
+        }
 
-            .message.received {
-                background-color: #e8e8e8;
-                align-self: flex-end;
-                text-align: right;
-            }
+        .message.received {
+            background-color: #e8e8e8;
+            align-self: flex-end;
+            text-align: right;
+        }
 
-            .message img, .message video {
-                max-width: 100%;
-                height: auto;
-                display: block;
-                margin: 0 auto;
-            }
+        .message img, .message video {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+        }
 
         .modal-header {
-            margin-top: 70px; 
+            margin-top: 70px;
         }
 
         .user-item.active .text-muted {
@@ -62,16 +63,17 @@
     </style>
 </head>
 <body>
-    <div class="container ">
+    <div class="container">
         <div class="row">
-            <!--Messages-->
+            <!-- Messages -->
             <div class="col-md-9">
-                <div class="">
-                    <h5 class="modal-title" id="chatModalLabel"> <span id="chatUser"></span></h5>
+                <div>
+                    <h5 class="modal-title" id="chatModalLabel">
+                        <span id="chatUser"></span>
+                    </h5>
                     <h2>Messages</h2>
                 </div>
                 <div class="modal-body" style="display:none;" id="messageBox">
-                    <!-- Chat content goes here -->
                     <div id="chatContent" style="height: 70vh; overflow-y: auto;">
                         <div id="message-container">
                             <div class="message-container" id="messages-list"></div>
@@ -92,35 +94,29 @@
                         <button id="send-file" class="btn btn-danger" type="submit">Gửi tệp</button>
                     </form>
                     <div id="preview"></div>
-
-                    <div id="preview"></div>
-                    <input type="hidden" id="FileType" value="" />
                 </div>
             </div>
-            <!--UserList-->
+            <!-- UserList -->
             <div class="col-md-3">
                 <div class="position-fixed" style="top: 70px; width: 25%;">
                     @if (Model != null && Model.Users != null)
                     {
                         <details>
-                        <summary>Danh sách liên hệ:</summary>
-                        <div class="overflow-auto" style="height: 80vh;">
-                            <div class="list-group">
-                                @foreach (var user in Model.Users)
-                                {
-                                    <a href="#" data-id="@user.Id" class="list-group-item list-group-item-action user-item" >
-                                        <div class="d-flex w-100 justify-content-between">
-                                            <h5 class="mb-1">@user.FullName</h5>
-                                        </div>
-                                        <small class="text-muted">Tham gia vào: @user.CreatedAt.ToString("dd MMMM, yyyy")</small>
-                                    </a>
-                                }
-                            </div>
+                            <summary>Danh sách liên hệ:</summary>
+                            <div class="overflow-auto" style="height: 80vh;">
+                                <div class="list-group">
+                                    @foreach (var user in Model.Users)
+                                    {
+                                        <a href="#" data-id="@user.Id" class="list-group-item list-group-item-action user-item">
+                                            <div class="d-flex w-100 justify-content-between">
+                                                <h5 class="mb-1">@user.FullName</h5>
+                                            </div>
+                                            <small class="text-muted">Tham gia vào: @user.CreatedAt.ToString("dd MMMM, yyyy")</small>
+                                        </a>
+                                    }
+                                </div>
                             </div>
                         </details>
-                    }
-                    else
-                    {
                     }
                 </div>
             </div>
@@ -134,8 +130,33 @@
                 var currentChatUserId = null;
                 var currentMessageCount = 0;
 
+                // const socket = new WebSocket(`ws://localhost:3000/ws?UserID=${currentUserId}`);
+                const socket = new WebSocket(`/ws?UserID=${currentUserId}`);
+
+                socket.onopen = function (event) {
+                    console.log("WebSocket is open now.");
+                };
+
+                socket.onmessage = function (event) {
+                    console.log("WebSocket message received:", event.data);
+                    switch (message.type) {
+                        case "refresh":
+                            updateMessages();
+                            break;
+                        case "notification":
+                            showNotification(message.content);
+                            break;
+                        default:
+                            console.log("Unknown message type:", message.type);
+                    }
+                };
+
+                socket.onclose = function (event) {
+                    console.log("WebSocket is closed now.");
+                };
+
                 function appendMessages(messages) {
-                    messages.reverse(); 
+                    messages.reverse();
                     messages.forEach(function (message) {
                         var messageHtml = '';
                         var isSent = message.sendId == currentUserId;
@@ -153,13 +174,13 @@
                             messageHtml = `<div class="message ${isSent ? 'sent' : 'received'}">${message.value}<div class="message-time">${message.sentTime}</div></div>`;
                         }
 
-                        $('#messages-list').prepend(messageHtml); // Prepend each message
+                        $('#messages-list').prepend(messageHtml);
                     });
                 }
 
                 function updateMessages() {
                     if (currentChatUserId) {
-                        console.log("Updating messages for chat user ID:", currentChatUserId); 
+                        console.log("Updating messages for chat user ID:", currentChatUserId);
                         var chatContent = document.getElementById('chatContent');
                         var scrollPosition = chatContent.scrollTop;
 
@@ -170,15 +191,18 @@
                                 if (data.length > currentMessageCount || data.length == 0) {
                                     $('#messages-list').empty();
                                     appendMessages(data);
-                                    chatContent.scrollTop = chatContent.scrollHeight; // Optionally adjust scroll
+                                    chatContent.scrollTop = chatContent.scrollHeight;
                                 }
-                                currentMessageCount = data.length; // Update the current message count
+                                currentMessageCount = data.length;
                             }
                         });
                     }
                 }
 
-                // Open message
+                function showNotification(content) {
+                    alert("Notification: " + content);
+                }
+
                 $('.user-item').click(function () {
                     var userId = $(this).data('id');
                     $('.user-item').removeClass('active');
@@ -191,36 +215,38 @@
                     messageBox.style.display = "block";
                     document.getElementById("ReceiveIdFile").value = userId;
                     currentChatUserId = userId;
-                    currentMessageCount = 0; // Reset message count when switching users
+                    currentMessageCount = 0;
 
                     updateMessages();
                 });
 
-                $('#send-message').click(function () {
-                    var messageValue = $('#Value').val();
-                    var receiveId = $('#ReceiveId').val();
-                    var type = $('#Type').val();
+                document.getElementById('send-message').addEventListener('click', function () {
+                    var messageValue = document.getElementById('Value').value;
+                    var receiveId = document.getElementById('ReceiveId').value;
+                    var sendId = document.getElementById('SendId').value;
+                    var type = document.getElementById('Type').value;
 
-                    if (messageValue && receiveId) {
-                        $.ajax({
-                            url: '/Message/SendMessage',
+                    if (messageValue && receiveId && sendId) {
+                        fetch('/Message/SendMessage', {
                             method: 'POST',
-                            contentType: 'application/json',
-                            data: JSON.stringify({
-                                sendId: currentUserId,
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify({
+                                sendId: sendId,
                                 receiveId: receiveId,
                                 type: type,
                                 value: messageValue
-                            }),
-                            success: function () {
-                                $('#Value').val('');
+                            })
+                        }).then(response => {
+                            if (response.ok) {
+                                document.getElementById('Value').value = '';
                                 updateMessages();
                             }
                         });
                     }
                 });
 
-                // Preview image, video, and audio
                 document.getElementById('inputFile').addEventListener('change', function () {
                     var file = this.files[0];
                     var fileType = file.type;
@@ -290,7 +316,6 @@
                     }
                 });
 
-                // Send file
                 document.getElementById('send-file').addEventListener('click', function (event) {
                     event.preventDefault();
                     var fileType = document.getElementById('FileType').value;
@@ -332,8 +357,6 @@
                     });
                 });
 
-                // Automatically update messages every 5 seconds
-                setInterval(updateMessages, 5000);
             });
         </script>
     }
